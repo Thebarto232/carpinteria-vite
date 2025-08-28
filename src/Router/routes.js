@@ -8,6 +8,7 @@ import { loginController } from '../Views/Auth/Login/loginController.js';
 import { dashboardController } from '../Views/Dashboard/dashboardController.js';
 import { rolesController } from '../Views/Roles/rolesController.js';
 import { usuariosController } from '../Views/Usuarios/usuariosController.js';
+import { categoriasController } from '../Views/Categorias/categoriasController.js';
 
 /**
  * Definición de rutas de la aplicación
@@ -54,5 +55,14 @@ export const routes = {
     controlador: usuariosController,
     private: true,
     can: 'leer_usuarios'
+  },
+
+  // Gestión de categorías (requiere autenticación y permiso)
+  Categorias: {
+    path: "Categorias/index.html",
+    controlador: categoriasController,
+    private: true,
+    can: 'leer_categorias'
+  },
   }
 };
