@@ -1,0 +1,462 @@
+<div class="home-container">
+  <!-- Navegación -->
+  <nav class="home-nav">
+    <div class="nav-content">
+      <div class="nav-brand">
+        <i data-lucide="hammer" width="24" height="24" style="color: #3b82f6;"></i>
+        <span>Carpintería Pro</span>
+      </div>
+      <div class="nav-actions">
+        <button class="nav-button" id="btnIniciarSesion">
+          <i data-lucide="log-in" width="16" height="16"></i>
+          Iniciar Sesión
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1 class="hero-title">
+          <i data-lucide="hammer" width="40" height="40" style="color: #3b82f6;"></i>
+          Sistema de Gestión de Carpintería
+        </h1>
+        <p class="hero-subtitle">
+          Administra eficientemente productos, herramientas, usuarios y más en tu taller de carpintería
+        </p>
+        <div class="hero-buttons">
+          <button class="btn-primary" id="getStartedBtn">
+            <i data-lucide="play" width="18" height="18"></i>
+            Comenzar
+          </button>
+          <button class="btn-secondary" id="learnMoreBtn">
+            <i data-lucide="info" width="18" height="18"></i>
+            Saber Más
+          </button>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-card">
+          <i data-lucide="package" width="64" height="64" style="color: #3b82f6;"></i>
+          <h3>Gestión Completa</h3>
+          <p>Control total de tu inventario y procesos</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features">
+    <div class="features-content">
+      <h2 class="features-title">
+        <i data-lucide="star" width="28" height="28"></i>
+        Características Principales
+      </h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i data-lucide="package" width="32" height="32"></i>
+          </div>
+          <h3>Gestión de Productos</h3>
+          <p>Administra tu catálogo de productos, precios, stock y características técnicas de manera eficiente.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i data-lucide="users" width="32" height="32"></i>
+          </div>
+          <h3>Control de Usuarios</h3>
+          <p>Maneja permisos, roles y accesos de tu equipo con un sistema robusto de autenticación.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i data-lucide="hammer" width="32" height="32"></i>
+          </div>
+          <h3>Herramientas</h3>
+          <p>Lleva un registro detallado del estado, mantenimiento y ubicación de tus herramientas.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i data-lucide="clipboard-list" width="32" height="32"></i>
+          </div>
+          <h3>Reportes Detallados</h3>
+          <p>Genera informes completos sobre ventas, inventario, productividad y más.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i data-lucide="shield" width="32" height="32"></i>
+          </div>
+          <h3>Seguridad Avanzada</h3>
+          <p>Protege tu información con autenticación JWT y control de permisos granular.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i data-lucide="smartphone" width="32" height="32"></i>
+          </div>
+          <h3>Diseño Responsivo</h3>
+          <p>Accede desde cualquier dispositivo - escritorio, tablet o móvil.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats">
+    <div class="stats-content">
+      <h2 class="stats-title">
+        <i data-lucide="trending-up" width="28" height="28"></i>
+        Optimiza tu Productividad
+      </h2>
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-icon">
+            <i data-lucide="clock" width="24" height="24"></i>
+          </div>
+          <h3>50%</h3>
+          <p>Menos tiempo en gestión administrativa</p>
+        </div>
+        <div class="stat-item">
+          <div class="stat-icon">
+            <i data-lucide="check-circle" width="24" height="24"></i>
+          </div>
+          <h3>100%</h3>
+          <p>Control sobre tu inventario</p>
+        </div>
+        <div class="stat-item">
+          <div class="stat-icon">
+            <i data-lucide="users" width="24" height="24"></i>
+          </div>
+          <h3>∞</h3>
+          <p>Usuarios y roles configurables</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .home-container {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Navigation */
+    .home-nav {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+    }
+
+    .nav-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #1f2937;
+    }
+
+    .nav-button {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: #3b82f6;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .nav-button:hover {
+      background: #2563eb;
+      transform: translateY(-1px);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 4rem 2rem;
+      color: white;
+    }
+
+    .hero-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .hero-title {
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1.25rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+      line-height: 1.6;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn-primary, .btn-secondary {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem 2rem;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+    }
+
+    .btn-primary {
+      background: white;
+      color: #3b82f6;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(255,255,255,0.3);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.2);
+      color: white;
+      border: 2px solid rgba(255,255,255,0.3);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.3);
+      transform: translateY(-2px);
+    }
+
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+    }
+
+    .hero-card {
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(10px);
+      padding: 3rem;
+      border-radius: 20px;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .hero-card h3 {
+      font-size: 1.5rem;
+      margin: 1rem 0 0.5rem 0;
+      color: white;
+    }
+
+    .hero-card p {
+      color: rgba(255,255,255,0.9);
+      margin: 0;
+    }
+
+    /* Features Section */
+    .features {
+      background: white;
+      padding: 5rem 2rem;
+    }
+
+    .features-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .features-title {
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #1f2937;
+      margin-bottom: 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .feature-card {
+      background: #f9fafb;
+      padding: 2rem;
+      border-radius: 15px;
+      text-align: center;
+      border: 2px solid #e5e7eb;
+      transition: all 0.3s ease;
+    }
+
+    .feature-card:hover {
+      background: white;
+      border-color: #3b82f6;
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(59, 130, 246, 0.15);
+    }
+
+    .feature-icon {
+      width: 64px;
+      height: 64px;
+      background: #3b82f6;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      margin: 0 auto 1.5rem auto;
+    }
+
+    .feature-card h3 {
+      color: #1f2937;
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .feature-card p {
+      color: #6b7280;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* Stats Section */
+    .stats {
+      background: #1f2937;
+      color: white;
+      padding: 4rem 2rem;
+    }
+
+    .stats-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .stats-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+    }
+
+    .stat-item {
+      background: rgba(255,255,255,0.1);
+      padding: 2rem;
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+    }
+
+    .stat-icon {
+      width: 48px;
+      height: 48px;
+      background: #3b82f6;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      margin: 0 auto 1rem auto;
+    }
+
+    .stat-item h3 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      color: #3b82f6;
+    }
+
+    .stat-item p {
+      margin: 0;
+      opacity: 0.9;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .hero-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: center;
+      }
+
+      .hero-title {
+        font-size: 2rem;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-content {
+        padding: 0 1rem;
+      }
+
+      .features-title, .stats-title {
+        font-size: 1.8rem;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+    }
+  </style>
+</div>
