@@ -1,0 +1,160 @@
+/* Estilos adicionales para iconos de Lucide */
+
+/* Iconos generales */
+.icon-before {
+  margin-right: 0.5rem;
+}
+
+.icon-after {
+  margin-left: 0.5rem;
+}
+
+.nav-icon {
+  margin-right: 0.5rem;
+  color: #f8f9fa;
+}
+
+.title-icon {
+  margin-right: 0.75rem;
+  color: #f8f9fa;
+  vertical-align: middle;
+}
+
+/* Iconos en botones */
+button svg {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 0.5rem;
+}
+
+button:last-child svg {
+  margin-right: 0;
+}
+
+/* Iconos en navegación */
+.nav-btn svg,
+.nav-tab svg {
+  margin-right: 0.5rem;
+  vertical-align: middle;
+}
+
+.action-btn svg {
+  margin: 0;
+}
+
+/* Iconos en dropdown */
+.dropdown-item svg {
+  margin-right: 0.75rem;
+  vertical-align: middle;
+}
+
+.dropdown-icon {
+  margin-left: 0.5rem;
+}
+
+/* Iconos en estadísticas */
+.stat-icon svg {
+  width: 24px;
+  height: 24px;
+  color: #007bff;
+}
+
+/* Iconos en alertas y estados */
+.success-icon {
+  color: #28a745;
+}
+
+.error-icon {
+  color: #dc3545;
+}
+
+.warning-icon {
+  color: #ffc107;
+}
+
+.info-icon {
+  color: #17a2b8;
+}
+
+/* Hover effects para iconos */
+.nav-btn:hover svg,
+.nav-tab:hover svg {
+  color: inherit;
+}
+
+.action-btn:hover svg {
+  transform: scale(1.1);
+  transition: transform 0.2s ease;
+}
+
+/* Iconos responsivos */
+@media (max-width: 768px) {
+  .nav-btn svg,
+  .nav-tab svg {
+    margin-right: 0.25rem;
+  }
+  
+  .title-icon {
+    margin-right: 0.5rem;
+  }
+}
+
+/* Spinner para iconos de carga */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.icon-spinning {
+  animation: spin 1s linear infinite;
+}
+
+/* Iconos en formularios */
+.form-group svg {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6c757d;
+  pointer-events: none;
+}
+
+.form-input-with-icon {
+  padding-left: 2.5rem;
+}
+
+/* Iconos en tarjetas */
+.card-header svg {
+  margin-right: 0.5rem;
+  vertical-align: middle;
+}
+
+/* Tamaños específicos de iconos */
+.icon-xs {
+  width: 12px;
+  height: 12px;
+}
+
+.icon-sm {
+  width: 16px;
+  height: 16px;
+}
+
+.icon-md {
+  width: 20px;
+  height: 20px;
+}
+
+.icon-lg {
+  width: 24px;
+  height: 24px;
+}
+
+.icon-xl {
+  width: 32px;
+  height: 32px;
+}
