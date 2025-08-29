@@ -9,6 +9,8 @@ import { dashboardController } from '../Views/Dashboard/dashboardController.js';
 import { rolesController } from '../Views/Roles/rolesController.js';
 import { usuariosController } from '../Views/Usuarios/usuariosController.js';
 import { categoriasController } from '../Views/Categorias/categoriasController.js';
+import { proveedoresController } from '../Views/Proveedores/proveedoresController.js';
+import { productosController } from '../Views/Productos/productosController.js';
 
 /**
  * Definición de rutas de la aplicación
@@ -64,5 +66,22 @@ export const routes = {
     private: true,
     can: 'leer_categorias'
   },
+
+  // Gestión de proveedores (requiere autenticación y permiso)
+  Proveedores: {
+    path: "Proveedores/index.html",
+    controlador: proveedoresController,
+    private: true,
+    can: 'leer_proveedores'
+  },
+
+  // Gestión de productos (requiere autenticación y permiso)
+  Productos: {
+    path: "Productos/index.html",
+    controlador: productosController,
+    private: true,
+    can: 'leer_productos'
+  },
+
   }
 };
