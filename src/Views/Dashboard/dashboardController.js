@@ -112,42 +112,11 @@ const cargarInformacionUsuario = () => {
  * Configura eventos globales del dashboard
  */
 const configurarEventosGlobales = () => {
-  // Escuchar cambios de sección desde la navegación
-  document.addEventListener('sectionChange', manejarCambioSeccion);
-  
   // Escuchar cambios en datos del usuario
   document.addEventListener('userDataChanged', manejarCambioUsuario);
   
   // Escuchar cambios en el estado de autenticación
   document.addEventListener('authStateChanged', manejarCambioAuth);
-};
-
-/**
- * Maneja los cambios de sección desde la navegación
- * @param {CustomEvent} event - Evento con detalles de la sección
- */
-const manejarCambioSeccion = (event) => {
-  const { section } = event.detail;
-  
-  console.log(`Cambiando a sección: ${section}`);
-  
-  // TODO: Implementar cambio de contenido según la sección
-  switch (section) {
-    case 'dashboard':
-      mostrarSeccionDashboard();
-      break;
-    case 'proyectos':
-      mostrarSeccionProyectos();
-      break;
-    case 'clientes':
-      mostrarSeccionClientes();
-      break;
-    case 'inventario':
-      mostrarSeccionInventario();
-      break;
-    default:
-      console.warn(`Sección no reconocida: ${section}`);
-  }
 };
 
 /**
@@ -197,7 +166,7 @@ const configurarAccionesRapidas = () => {
 const manejarAccionRapida = (action) => {
   switch (action) {
     case 'productos':
-      mostrarGestionProductos();
+      window.location.hash = '#Productos';
       break;
     case 'usuarios':
       mostrarGestionUsuarios();
@@ -205,11 +174,11 @@ const manejarAccionRapida = (action) => {
     case 'roles':
       window.location.hash = '#Roles';
       break;
-    case 'herramientas':
-      mostrarGestionHerramientas();
+    case 'categorias':
+      window.location.hash = '#Categorias';
       break;
-    case 'reportes':
-      mostrarReportes();
+    case 'proveedores':
+      window.location.hash = '#Proveedores';
       break;
     case 'configuracion':
       mostrarConfiguracion();
@@ -219,74 +188,13 @@ const manejarAccionRapida = (action) => {
   }
 };
 
-// Funciones para manejar secciones
-const mostrarSeccionDashboard = () => {
-  console.log('Mostrando sección Dashboard');
-  // TODO: Mostrar contenido del dashboard principal
-};
-
-const mostrarSeccionProyectos = () => {
-  console.log('Mostrando sección Proyectos'); 
-  // TODO: Implementar vista de proyectos
-  success('Funcionalidad de proyectos en desarrollo');
-};
-
-const mostrarSeccionClientes = () => {
-  console.log('Mostrando sección Clientes');
-  // TODO: Implementar vista de clientes
-  success('Funcionalidad de clientes en desarrollo');
-};
-
-const mostrarSeccionInventario = () => {
-  console.log('Mostrando sección Inventario');
-  // TODO: Implementar vista de inventario
-  success('Funcionalidad de inventario en desarrollo');
-};
-
-// Funciones para acciones rápidas
-const mostrarGestionProductos = () => {
-  console.log('Gestionar productos');
-  // TODO: Implementar gestión de productos
-  success('Funcionalidad de gestión de productos en desarrollo');
-};
-
 const mostrarGestionUsuarios = () => {
   console.log('Gestionar usuarios');
   window.location.hash = '#Usuarios';
-};
-
-const mostrarGestionHerramientas = () => {
-  console.log('Gestionar herramientas');
-  // TODO: Implementar gestión de herramientas
-  success('Funcionalidad de gestión de herramientas en desarrollo');
 };
 
 const mostrarConfiguracion = () => {
   console.log('Configuración del sistema');
   // TODO: Implementar configuración
   success('Funcionalidad de configuración en desarrollo');
-};
-
-const mostrarNuevoProyecto = () => {
-  console.log('Crear nuevo proyecto');
-  // TODO: Implementar modal o vista de nuevo proyecto
-  success('Funcionalidad de nuevo proyecto en desarrollo');
-};
-
-const mostrarGestionClientes = () => {
-  console.log('Gestionar clientes');
-  // TODO: Implementar gestión de clientes
-  success('Funcionalidad de gestión de clientes en desarrollo');
-};
-
-const mostrarInventario = () => {
-  console.log('Ver inventario');
-  // TODO: Implementar vista de inventario
-  success('Funcionalidad de inventario en desarrollo');
-};
-
-const mostrarReportes = () => {
-  console.log('Ver reportes');
-  // TODO: Implementar vista de reportes
-  success('Funcionalidad de reportes en desarrollo');
 };

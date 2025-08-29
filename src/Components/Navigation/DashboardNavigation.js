@@ -68,17 +68,29 @@ export class DashboardNavigation {
               <i data-lucide="bar-chart-3" width="16" height="16"></i>
               Dashboard
             </button>
-            <button class="nav-btn" data-section="proyectos">
-              <i data-lucide="wrench" width="16" height="16"></i>
-              Proyectos
+            <button class="nav-btn" data-section="tienda">
+              <i data-lucide="shopping-cart" width="16" height="16"></i>
+              Tienda
             </button>
-            <button class="nav-btn" data-section="clientes">
-              <i data-lucide="users" width="16" height="16"></i>
-              Clientes
-            </button>
-            <button class="nav-btn" data-section="inventario">
+            <button class="nav-btn" data-section="productos">
               <i data-lucide="package" width="16" height="16"></i>
-              Inventario
+              Productos
+            </button>
+            <button class="nav-btn" data-section="categorias">
+              <i data-lucide="tag" width="16" height="16"></i>
+              Categorías
+            </button>
+            <button class="nav-btn" data-section="proveedores">
+              <i data-lucide="truck" width="16" height="16"></i>
+              Proveedores
+            </button>
+            <button class="nav-btn" data-section="roles">
+              <i data-lucide="shield" width="16" height="16"></i>
+              Roles
+            </button>
+            <button class="nav-btn" data-section="usuarios">
+              <i data-lucide="users" width="16" height="16"></i>
+              Usuarios
             </button>
           </nav>
         </div>
@@ -131,18 +143,24 @@ export class DashboardNavigation {
         
         .main-nav {
           display: flex;
-          gap: 1rem;
+          gap: 0.5rem;
+          flex-wrap: wrap;
+          justify-content: center;
         }
         
         .nav-btn {
           background: transparent;
           color: rgba(255, 255, 255, 0.8);
           border: 1px solid rgba(255, 255, 255, 0.2);
-          padding: 0.5rem 1rem;
+          padding: 0.5rem 0.75rem;
           border-radius: 5px;
           cursor: pointer;
-          font-size: 0.9rem;
+          font-size: 0.85rem;
           transition: all 0.3s ease;
+          display: flex;
+          align-items: center;
+          gap: 0.25rem;
+          white-space: nowrap;
         }
         
         .nav-btn:hover {
@@ -236,10 +254,27 @@ export class DashboardNavigation {
           .main-nav {
             justify-content: center;
             flex-wrap: wrap;
+            gap: 0.5rem;
+          }
+          
+          .nav-btn {
+            font-size: 0.8rem;
+            padding: 0.4rem 0.6rem;
           }
           
           .user-details {
             text-align: center;
+          }
+        }
+        
+        @media (max-width: 1024px) {
+          .nav-btn {
+            font-size: 0.8rem;
+            padding: 0.4rem 0.6rem;
+          }
+          
+          .main-nav {
+            gap: 0.25rem;
           }
         }
       </style>
@@ -287,12 +322,29 @@ export class DashboardNavigation {
     });
     event.target.classList.add('active');
 
-    // Disparar evento personalizado para cambio de sección
-    const cambioSeccion = new CustomEvent('sectionChange', {
-      detail: { section },
-      bubbles: true
-    });
-    document.dispatchEvent(cambioSeccion);
+    // Redirigir a las páginas correspondientes
+    switch (section) {
+      case 'dashboard':
+        window.location.hash = '#Dashboard';
+        break;
+      case 'productos':
+        window.location.hash = '#Productos';
+        break;
+      case 'categorias':
+        window.location.hash = '#Categorias';
+        break;
+      case 'proveedores':
+        window.location.hash = '#Proveedores';
+        break;
+      case 'roles':
+        window.location.hash = '#Roles';
+        break;
+      case 'usuarios':
+        window.location.hash = '#Usuarios';
+        break;
+      default:
+        console.warn(`Sección no reconocida: ${section}`);
+    }
   }
 
   /**
