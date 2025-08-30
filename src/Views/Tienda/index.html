@@ -1,0 +1,900 @@
+<div class="tienda-container">
+  <!-- Navegación pública -->
+  <div id="publicNavContainer"></div>
+
+  <!-- Hero Section de la Tienda -->
+  <section class="tienda-hero">
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1 class="hero-title">
+          <i data-lucide="shopping-bag" width="40" height="40" style="color: #3b82f6;"></i>
+          Tienda de Productos
+        </h1>
+        <p class="hero-subtitle">
+          Descubre una amplia selección de productos de carpintería de alta calidad
+        </p>
+      </div>
+      <div class="hero-actions">
+        <button class="btn-carrito" id="btnCarrito">
+          <i data-lucide="shopping-cart" width="20" height="20"></i>
+          Carrito
+          <span class="carrito-contador" id="carritoContador">0</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filtros y búsqueda -->
+  <section class="filtros-section">
+    <div class="filtros-container">
+      <div class="filtros-header">
+        <h2>
+          <i data-lucide="filter" width="24" height="24"></i>
+          Buscar Productos
+        </h2>
+      </div>
+      
+      <div class="filtros-grid">
+        <div class="filtro-item">
+          <label for="searchInput">
+            <i data-lucide="search" width="16" height="16"></i>
+            Buscar
+          </label>
+          <input 
+            type="text" 
+            id="searchInput" 
+            placeholder="Buscar productos..."
+            class="form-input"
+          >
+        </div>
+        
+        <div class="filtro-item">
+          <label for="filtroCategoria">
+            <i data-lucide="tag" width="16" height="16"></i>
+            Categoría
+          </label>
+          <select id="filtroCategoria" class="form-select">
+            <option value="">Todas las categorías</option>
+          </select>
+        </div>
+        
+        <div class="filtro-item">
+          <label for="filtroProveedor">
+            <i data-lucide="truck" width="16" height="16"></i>
+            Proveedor
+          </label>
+          <select id="filtroProveedor" class="form-select">
+            <option value="">Todos los proveedores</option>
+          </select>
+        </div>
+        
+        <div class="filtro-item">
+          <label for="ordenarPor">
+            <i data-lucide="arrow-up-down" width="16" height="16"></i>
+            Ordenar por
+          </label>
+          <select id="ordenarPor" class="form-select">
+            <option value="nombre">Nombre</option>
+            <option value="precio_asc">Precio (menor a mayor)</option>
+            <option value="precio_desc">Precio (mayor a menor)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Grid de productos -->
+  <section class="productos-section">
+    <div class="productos-container">
+      <div class="productos-header">
+        <h2>
+          <i data-lucide="package" width="24" height="24"></i>
+          Productos Disponibles
+        </h2>
+      </div>
+      
+      <div class="productos-grid" id="productosGrid">
+        <!-- Los productos se cargarán dinámicamente aquí -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal del Carrito -->
+  <div class="modal-overlay" id="modalCarrito">
+    <div class="modal-content carrito-modal">
+      <div class="modal-header">
+        <h3>
+          <i data-lucide="shopping-cart" width="24" height="24"></i>
+          Mi Carrito
+        </h3>
+        <button class="modal-close" id="cerrarModalCarrito">
+          <i data-lucide="x" width="20" height="20"></i>
+        </button>
+      </div>
+      
+      <div class="modal-body">
+        <div class="carrito-contenido" id="carritoContenido">
+          <!-- Contenido del carrito se carga dinámicamente -->
+        </div>
+      </div>
+      
+      <div class="modal-footer">
+        <div class="carrito-resumen" id="carritoResumen">
+          <!-- Resumen del carrito -->
+        </div>
+        
+        <div class="carrito-acciones">
+          <button class="btn btn-secondary" id="btnVaciarCarrito">
+            <i data-lucide="trash-2" width="16" height="16"></i>
+            Vaciar Carrito
+          </button>
+          <button class="btn btn-primary" id="btnProcederCompra">
+            <i data-lucide="credit-card" width="16" height="16"></i>
+            Proceder a Compra
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="tienda-footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>
+          <i data-lucide="hammer" width="20" height="20"></i>
+          Carpintería Pro
+        </h4>
+        <p>Tu socio confiable en productos de carpintería</p>
+      </div>
+      
+      <div class="footer-section">
+        <h4>Enlaces Rápidos</h4>
+        <ul>
+          <li><a href="#Home">Inicio</a></li>
+          <li><a href="#Tienda">Tienda</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h4>Contacto</h4>
+        <p>
+          <i data-lucide="mail" width="16" height="16"></i>
+          info@carpinteriapro.com
+        </p>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2025 Carpintería Pro. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+</div>
+
+<style>
+/* ===== VARIABLES Y RESET ===== */
+:root {
+  --primary-color: #3b82f6;
+  --primary-dark: #2563eb;
+  --secondary-color: #64748b;
+  --success-color: #10b981;
+  --warning-color: #f59e0b;
+  --danger-color: #ef4444;
+  --background: #ffffff;
+  --surface: #f8fafc;
+  --border: #e2e8f0;
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --radius: 8px;
+  --transition: all 0.2s ease;
+}
+
+.tienda-container {
+  min-height: 100vh;
+  background: var(--background);
+}
+
+/* ===== NAVEGACIÓN PÚBLICA ===== */
+.home-nav {
+  background: var(--background);
+  border-bottom: 1px solid var(--border);
+  padding: 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow);
+}
+
+.nav-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  gap: 2rem;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 1.25rem;
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.nav-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius);
+  text-decoration: none;
+  color: var(--text-secondary);
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.nav-link:hover {
+  color: var(--primary-color);
+  background: rgba(59, 130, 246, 0.1);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav-user-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav-user-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem;
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.nav-user-name {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  font-size: 0.875rem;
+}
+
+.nav-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: var(--radius);
+  background: var(--primary-color);
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  text-decoration: none;
+  font-size: 0.875rem;
+}
+
+.nav-button:hover {
+  background: var(--primary-dark);
+  transform: translateY(-1px);
+}
+
+.nav-button-secondary {
+  background: var(--secondary-color);
+}
+
+.nav-button-secondary:hover {
+  background: #475569;
+}
+
+.nav-button-primary {
+  background: var(--primary-color);
+}
+
+/* ===== HERO SECTION ===== */
+.tienda-hero {
+  background: linear-gradient(135deg, var(--surface) 0%, rgba(59, 130, 246, 0.05) 100%);
+  padding: 4rem 2rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.hero-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+}
+
+.hero-text {
+  flex: 1;
+}
+
+.hero-title {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+  margin-bottom: 0;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.btn-carrito {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 1.5rem;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: var(--shadow);
+}
+
+.btn-carrito:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.carrito-contador {
+  background: white;
+  color: var(--primary-color);
+  padding: 0.25rem 0.5rem;
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  min-width: 1.5rem;
+  text-align: center;
+}
+
+/* ===== SECCIONES ===== */
+.filtros-section,
+.productos-section {
+  padding: 3rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.filtros-header,
+.productos-header {
+  margin-bottom: 2rem;
+}
+
+.filtros-header h2,
+.productos-header h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+/* ===== FILTROS ===== */
+.filtros-container {
+  background: var(--surface);
+  padding: 2rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.filtros-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.filtro-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.filtro-item label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  font-size: 0.875rem;
+}
+
+.form-input,
+.form-select {
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: white;
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  transition: var(--transition);
+}
+
+.form-input:focus,
+.form-select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* ===== GRID DE PRODUCTOS ===== */
+.productos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.producto-card {
+  background: white;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  transition: var(--transition);
+  box-shadow: var(--shadow);
+}
+
+.producto-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.producto-image {
+  background: var(--surface);
+  padding: 2rem;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+
+.producto-content {
+  padding: 1.5rem;
+}
+
+.producto-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.producto-description {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.producto-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+
+.producto-categoria {
+  background: rgba(59, 130, 246, 0.1);
+  color: var(--primary-color);
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius);
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.producto-stock {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--success-color);
+}
+
+.producto-stock.agotado {
+  color: var(--danger-color);
+}
+
+.producto-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.producto-precio {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.btn-agregar-carrito {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: var(--success-color);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  font-size: 0.875rem;
+}
+
+.btn-agregar-carrito:hover:not(:disabled) {
+  background: #059669;
+  transform: translateY(-1px);
+}
+
+.btn-agregar-carrito:disabled {
+  background: var(--secondary-color);
+  cursor: not-allowed;
+}
+
+/* ===== ESTADOS ===== */
+.loading,
+.empty-state,
+.error-state {
+  text-align: center;
+  padding: 3rem;
+  color: var(--text-secondary);
+}
+
+.loading i,
+.empty-state i,
+.error-state i {
+  margin-bottom: 1rem;
+  color: var(--secondary-color);
+}
+
+.empty-state h3,
+.error-state h3 {
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.error-state .btn {
+  margin-top: 1rem;
+}
+
+/* ===== MODAL ===== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--transition);
+}
+
+.modal-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-content {
+  background: white;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  max-width: 600px;
+  max-height: 80vh;
+  width: 90%;
+  overflow: hidden;
+  transform: scale(0.9);
+  transition: var(--transition);
+}
+
+.modal-overlay.show .modal-content {
+  transform: scale(1);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.modal-header h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: var(--radius);
+  color: var(--text-secondary);
+  transition: var(--transition);
+}
+
+.modal-close:hover {
+  background: var(--surface);
+  color: var(--text-primary);
+}
+
+.modal-body {
+  padding: 1.5rem;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.modal-footer {
+  padding: 1.5rem;
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+}
+
+/* ===== CARRITO ===== */
+.carrito-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid var(--border);
+  gap: 1rem;
+}
+
+.carrito-item:last-child {
+  border-bottom: none;
+}
+
+.carrito-item-info {
+  flex: 1;
+}
+
+.carrito-item-title {
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.carrito-item-precio {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  margin-bottom: 0.25rem;
+}
+
+.carrito-item-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cantidad-input {
+  width: 60px;
+  text-align: center;
+  padding: 0.25rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: var(--radius);
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  text-decoration: none;
+  font-size: 0.875rem;
+}
+
+.btn-sm {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+}
+
+.btn-primary {
+  background: var(--primary-color);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: var(--primary-dark);
+}
+
+.btn-secondary {
+  background: var(--secondary-color);
+  color: white;
+}
+
+.btn-secondary:hover {
+  background: #475569;
+}
+
+.btn-danger {
+  background: var(--danger-color);
+  color: white;
+}
+
+.btn-danger:hover {
+  background: #dc2626;
+}
+
+.carrito-resumen {
+  margin-bottom: 1rem;
+}
+
+.resumen-line {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+}
+
+.resumen-total {
+  border-top: 1px solid var(--border);
+  font-weight: 600;
+  font-size: 1.125rem;
+  color: var(--text-primary);
+}
+
+.carrito-acciones {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+/* ===== FOOTER ===== */
+.tienda-footer {
+  background: var(--text-primary);
+  color: white;
+  margin-top: 4rem;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 2rem 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.footer-section h4 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  color: white;
+}
+
+.footer-section p {
+  color: #94a3b8;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: 0.5rem;
+}
+
+.footer-section ul li a {
+  color: #94a3b8;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.footer-section ul li a:hover {
+  color: white;
+}
+
+.footer-bottom {
+  border-top: 1px solid #334155;
+  text-align: center;
+  padding: 2rem;
+  color: #94a3b8;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .nav-content {
+    padding: 1rem;
+    flex-wrap: wrap;
+  }
+  
+  .nav-center {
+    order: 3;
+    flex-basis: 100%;
+    justify-content: flex-start;
+    margin-top: 1rem;
+  }
+  
+  .hero-content {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .hero-title {
+    font-size: 2rem;
+  }
+  
+  .filtros-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .productos-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+  
+  .carrito-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .carrito-acciones {
+    flex-direction: column;
+  }
+}
+</style>

@@ -3,32 +3,76 @@
  * Maneja la lógica de la página principal y redirecciones
  */
 
+import { PublicNavigation } from '../../Components/Navigation/PublicNavigation.js';
+
 /**
  * Función principal del controlador de Home
  * Configura eventos de la página principal
  */
-export const homeController = () => {
-  // Configurar eventos
-  configurarEventos();
+export const homeController = async () => {
+  // Esperar a que el DOM esté listo
+  if (document.readyState === 'loading') {
+    await new Promise(resolve => {
+      document.addEventListener('DOMContentLoaded', resolve);
+    });
+  }
+
+  // Usar setTimeout para asegurar que el HTML se haya renderizado
+  await new Promise(resolve => setTimeout(resolve, 100));
+
+  // Esperar hasta que el contenedor esté disponible
+  try {
+    const navContainer = await esperarContenedor('publicNavContainer');
+    
+    // Inicializar navegación pública
+    const navigation = new PublicNavigation();
+    await navigation.init();
+    
+    // Configurar eventos
+    configurarEventos();
+    
+    // Inicializar iconos
+    if (typeof lucide !== 'undefined') {
+      lucide.createIcons();
+    }
+  } catch (err) {
+    console.error('Error inicializando Home:', err);
+  }
+};
+
+/**
+ * Espera hasta que un contenedor específico esté disponible en el DOM
+ */
+const esperarContenedor = (id, maxIntentos = 50) => {
+  return new Promise((resolve, reject) => {
+    let intentos = 0;
+    
+    const verificar = () => {
+      const contenedor = document.getElementById(id);
+      
+      if (contenedor) {
+        resolve(contenedor);
+        return;
+      }
+      
+      intentos++;
+      
+      if (intentos >= maxIntentos) {
+        reject(new Error(`Contenedor ${id} no encontrado`));
+        return;
+      }
+      
+      setTimeout(verificar, 100);
+    };
+    
+    verificar();
+  });
 };
 
 /**
  * Configura todos los eventos de la página de inicio
  */
 const configurarEventos = () => {
-  // Evento para el botón de iniciar sesión
-  const btnIniciarSesion = document.querySelector('#btnIniciarSesion');
-  
-  if (btnIniciarSesion) {
-    btnIniciarSesion.addEventListener('click', (e) => {
-      e.preventDefault();
-      location.hash = '#Login';
-    });
-  }
-  
-  // Mostrar/ocultar botón según estado de autenticación
-  mostrarBotonesSegunEstado();
-  
   // Agregar efecto hover a las tarjetas de características
   const featureCards = document.querySelectorAll('.feature-card');
   featureCards.forEach(card => {
@@ -41,41 +85,31 @@ const configurarEventos = () => {
       card.style.transform = 'translateY(0)';
     });
   });
-};
-
-/**
- * Muestra u oculta botones según el estado de autenticación
- */
-const mostrarBotonesSegunEstado = () => {
-  const token = localStorage.getItem('accessToken');
-  const btnIniciarSesion = document.querySelector('#btnIniciarSesion');
   
-  if (btnIniciarSesion) {
-    if (token) {
-      // Usuario autenticado - cambiar texto del botón
-      btnIniciarSesion.innerHTML = `
-        <i data-lucide="bar-chart-3" width="16" height="16"></i>
-        Ir al Dashboard
-      `;
-      btnIniciarSesion.onclick = () => {
+  // Eventos para botones de hero
+  const getStartedBtn = document.getElementById('getStartedBtn');
+  const learnMoreBtn = document.getElementById('learnMoreBtn');
+  
+  if (getStartedBtn) {
+    getStartedBtn.addEventListener('click', () => {
+      const token = localStorage.getItem('accessToken');
+      if (token) {
         location.hash = '#Dashboard';
-      };
-    } else {
-      // Usuario no autenticado - botón normal
-      btnIniciarSesion.innerHTML = `
-        <i data-lucide="user" width="16" height="16"></i>
-        Iniciar Sesión
-      `;
-      btnIniciarSesion.onclick = () => {
+      } else {
         location.hash = '#Login';
-      };
-    }
-    
-    // Inicializar iconos después de cambiar el contenido dinámicamente
-    setTimeout(() => {
-      if (window.lucide) {
-        window.lucide.createIcons();
       }
-    }, 100);
+    });
+  }
+  
+  if (learnMoreBtn) {
+    learnMoreBtn.addEventListener('click', () => {
+      // Scroll a la sección de características
+      const featuresSection = document.querySelector('.features');
+      if (featuresSection) {
+        featuresSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
   }
 };
+
+

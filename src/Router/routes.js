@@ -11,6 +11,7 @@ import { usuariosController } from '../Views/Usuarios/usuariosController.js';
 import { categoriasController } from '../Views/Categorias/categoriasController.js';
 import { proveedoresController } from '../Views/Proveedores/proveedoresController.js';
 import { productosController } from '../Views/Productos/productosController.js';
+import { tiendaController } from '../Views/Tienda/tiendaController.js';
 
 /**
  * Definición de rutas de la aplicación
@@ -83,5 +84,10 @@ export const routes = {
     can: 'leer_productos'
   },
 
+  // Tienda de productos (página pública si no está logueado, requiere login para carrito)
+  Tienda: {
+    path: "Tienda/index.html",
+    controlador: tiendaController,
+    private: false
   }
 };
