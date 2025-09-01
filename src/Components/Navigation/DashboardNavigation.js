@@ -68,10 +68,6 @@ export class DashboardNavigation {
               <i data-lucide="bar-chart-3" width="16" height="16"></i>
               Dashboard
             </button>
-            <button class="nav-btn" data-section="tienda">
-              <i data-lucide="shopping-cart" width="16" height="16"></i>
-              Tienda
-            </button>
             <button class="nav-btn" data-section="productos">
               <i data-lucide="package" width="16" height="16"></i>
               Productos
@@ -91,14 +87,6 @@ export class DashboardNavigation {
             <button class="nav-btn" data-section="usuarios">
               <i data-lucide="users" width="16" height="16"></i>
               Usuarios
-            </button>
-            <button class="nav-btn" data-section="compras">
-              <i data-lucide="credit-card" width="16" height="16"></i>
-              Comprar
-            </button>
-            <button class="nav-btn" data-section="mis-compras">
-              <i data-lucide="shopping-bag" width="16" height="16"></i>
-              Mis Compras
             </button>
             <button class="nav-btn" data-section="facturas">
               <i data-lucide="file-text" width="16" height="16"></i>
@@ -353,15 +341,6 @@ export class DashboardNavigation {
         break;
       case 'usuarios':
         window.location.hash = '#Usuarios';
-        break;
-      case 'tienda':
-        window.location.hash = '#Tienda';
-        break;
-      case 'compras':
-        window.location.hash = '#Compras';
-        break;
-      case 'mis-compras':
-        window.location.hash = '#MisCompras';
         break;
       case 'facturas':
         window.location.hash = '#Facturas';
