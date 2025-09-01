@@ -153,16 +153,29 @@ const configurarEventos = () => {
 const cargarProductos = async () => {
     try {
         mostrarCargando();
-        
         const response = await api.get('/productos');
-        
         if (response.success) {
-            productosDisponibles = response.data.productos.filter(p => p.estado === 'DISPONIBLE');
+            // Obtener solo los productos disponibles
+            let productos = response.data.productos.filter(p => p.estado === 'DISPONIBLE');
+            // Para cada producto, obtener sus imágenes
+            const productosConImagenes = await Promise.all(productos.map(async (producto) => {
+                try {
+                    const imagenesResp = await api.get(`/productos/${producto.id_producto}/imagenes`);
+                    if (Array.isArray(imagenesResp)) {
+                        producto.imagenes = imagenesResp.map(img => `http://localhost:3000${img.url_imagen}`);
+                    } else {
+                        producto.imagenes = [];
+                    }
+                } catch (err) {
+                    producto.imagenes = [];
+                }
+                return producto;
+            }));
+            productosDisponibles = productosConImagenes;
             mostrarProductos(productosDisponibles);
         } else {
             mostrarErrorProductos('Error al cargar los productos');
         }
-        
     } catch (err) {
         console.error('Error cargando productos:', err);
         mostrarErrorProductos('Error al cargar los productos');
@@ -258,38 +271,72 @@ const mostrarProductos = (productos) => {
         return;
     }
     
-    container.innerHTML = productos.map(producto => `
-        <div class="producto-card">
-            <div class="producto-image">
-                <i data-lucide="package" width="48" height="48"></i>
-            </div>
-            <div class="producto-content">
-                <h3 class="producto-title">${producto.nombre_producto}</h3>
-                <p class="producto-description">${producto.descripcion || 'Sin descripción'}</p>
-                
-                <div class="producto-meta">
-                    <span class="producto-categoria">${producto.nombre_categoria || 'Sin categoría'}</span>
-                    <span class="producto-stock ${producto.stock <= 0 ? 'agotado' : ''}">
-                        Stock: ${producto.stock}
-                    </span>
+        container.innerHTML = productos.map((producto, idx) => {
+        let imagenesHtml;
+        if (producto.imagenes && producto.imagenes.length > 0) {
+            // Carrusel: solo una imagen visible, flechas para navegar
+            imagenesHtml = `
+                <div class="producto-carrusel" data-idx="${idx}">
+                    <button class="carrusel-flecha carrusel-flecha-izq" data-accion="prev" data-idx="${idx}">&#8592;</button>
+                    <img src="${producto.imagenes[0]}" alt="Imagen de ${producto.nombre_producto}" class="producto-carrusel-img" data-idx="${idx}" />
+                    <button class="carrusel-flecha carrusel-flecha-der" data-accion="next" data-idx="${idx}">&#8594;</button>
                 </div>
-                
-                <div class="producto-footer">
-                    <span class="producto-precio">$${parseFloat(producto.precio).toLocaleString()}</span>
-                    <button 
-                        class="btn-agregar-carrito" 
-                        onclick="agregarAlCarrito(${producto.id_producto})"
-                        ${producto.stock <= 0 ? 'disabled' : ''}
-                    >
-                        <i data-lucide="plus" width="16" height="16"></i>
-                        ${producto.stock <= 0 ? 'Agotado' : 'Agregar'}
-                    </button>
+            `;
+        } else {
+            imagenesHtml = `
+                <div class="producto-image">
+                    <i data-lucide="package" width="48" height="48"></i>
+                </div>
+            `;
+        }
+        return `
+            <div class="producto-card">
+                ${imagenesHtml}
+                <div class="producto-content">
+                    <h3 class="producto-title">${producto.nombre_producto}</h3>
+                    <p class="producto-description">${producto.descripcion || 'Sin descripción'}</p>
+                    <div class="producto-meta">
+                        <span class="producto-categoria">${producto.nombre_categoria || 'Sin categoría'}</span>
+                        <span class="producto-stock ${producto.stock <= 0 ? 'agotado' : ''}">
+                            Stock: ${producto.stock}
+                        </span>
+                    </div>
+                    <div class="producto-footer">
+                        <span class="producto-precio">$${parseFloat(producto.precio).toLocaleString()}</span>
+                        <button 
+                            class="btn-agregar-carrito" 
+                            onclick="agregarAlCarrito(${producto.id_producto})"
+                            ${producto.stock <= 0 ? 'disabled' : ''}
+                        >
+                            <i data-lucide="plus" width="16" height="16"></i>
+                            ${producto.stock <= 0 ? 'Agotado' : 'Agregar'}
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
-    `).join('');
-    
+        `;
+    }).join('');
     lucide.createIcons();
+
+    // Carrusel JS: manejar flechas
+    productos.forEach((producto, idx) => {
+        if (producto.imagenes && producto.imagenes.length > 1) {
+            let actual = 0;
+            const carrusel = container.querySelector(`.producto-carrusel[data-idx='${idx}']`);
+            if (!carrusel) return;
+            const img = carrusel.querySelector('.producto-carrusel-img');
+            const btnPrev = carrusel.querySelector('.carrusel-flecha-izq');
+            const btnNext = carrusel.querySelector('.carrusel-flecha-der');
+            btnPrev.addEventListener('click', () => {
+                actual = (actual - 1 + producto.imagenes.length) % producto.imagenes.length;
+                img.src = producto.imagenes[actual];
+            });
+            btnNext.addEventListener('click', () => {
+                actual = (actual + 1) % producto.imagenes.length;
+                img.src = producto.imagenes[actual];
+            });
+        }
+    });
 };
 
 /**

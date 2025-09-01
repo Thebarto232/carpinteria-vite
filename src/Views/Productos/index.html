@@ -88,7 +88,7 @@
       </div>
       
       <div class="modal-body">
-        <form id="productoForm">
+  <form id="productoForm">
           <div class="form-row">
             <div class="form-group">
               <label for="nombreProducto">Nombre del Producto *</label>
@@ -179,7 +179,23 @@
               </select>
             </div>
           </div>
+
+          <!-- Campo para subir imagen -->
+          <div class="form-group">
+            <label for="imagenProducto">Imagenes del producto</label>
+            <input 
+              type="file" 
+              id="imagenProducto" 
+              name="imagen" 
+              class="form-control" 
+              accept="image/*" 
+              multiple
+            >
+            <div id="errorImagenProducto" class="error-message"></div>
+            <div id="previewImagenProducto" style="margin-top:10px;"></div>
+          </div>
         </form>
+        <div id="imagenesProducto"></div>
       </div>
 
       <div class="modal-footer">

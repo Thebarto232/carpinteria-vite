@@ -1,3 +1,4 @@
+
 /**
  * Controlador para la gestión de productos
  * Maneja el CRUD completo de productos con validación de permisos
@@ -393,6 +394,23 @@ const abrirModalCrear = () => {
     }
 };
 
+// Eliminar imagen de producto
+async function eliminarImagenProducto(idProducto, idImagen) {
+    if (!confirm('¿Seguro que deseas eliminar esta imagen?')) return;
+    try {
+        const resp = await api.del(`/productos/${idProducto}/imagenes/${idImagen}`);
+        if (resp.message) {
+            await success('Imagen eliminada');
+            cargarImagenesProducto(idProducto);
+        } else {
+            await error(resp.error || 'No se pudo eliminar la imagen');
+        }
+    } catch (err) {
+        await error('Error al eliminar la imagen');
+    }
+}
+window.eliminarImagenProducto = eliminarImagenProducto;
+
 /**
  * Abre el modal para editar un producto existente
  */
@@ -428,7 +446,10 @@ const editarProducto = async (idProducto) => {
         window.productoEditando = idProducto;
         document.getElementById('modalProducto').classList.add('show');
         document.getElementById('nombreProducto').focus();
-        
+    
+
+        await cargarImagenesProducto(idProducto);
+
         // Reinicializar iconos
         if (typeof lucide !== 'undefined') {
             lucide.createIcons();
@@ -459,6 +480,8 @@ const verDetallesProducto = async (idProducto) => {
         
         // Llenar formulario
         llenarFormulario(producto);
+
+        
         
         // Deshabilitar campos
         habilitarCampos(true);
@@ -475,6 +498,8 @@ const verDetallesProducto = async (idProducto) => {
         window.productoEditando = 'view';
         document.getElementById('modalProducto').classList.add('show');
         
+        await cargarImagenesProducto(idProducto);
+
         // Reinicializar iconos
         if (typeof lucide !== 'undefined') {
             lucide.createIcons();
@@ -519,19 +544,36 @@ const confirmarEliminacion = async () => {
     }
 };
 
+async function cargarImagenesProducto(idProducto) {
+    try {
+        const imagenes = await api.get(`/productos/${idProducto}/imagenes`);
+        const contenedor = document.getElementById('imagenesProducto');
+        contenedor.innerHTML = '';
+        contenedor.classList.add('imagenes-producto-lista');
+        const isView = window.productoEditando === 'view';
+        imagenes.forEach(img => {
+            const url = `http://localhost:3000${img.url_imagen}`;
+            contenedor.innerHTML += `
+                <div class="imagen-item" data-id-imagen="${img.id_imagen}">
+                    <img src="${url}" alt="Imagen producto">
+                    ${!isView ? `<button class='imagen-eliminar-btn' title='Eliminar imagen' onclick='eliminarImagenProducto(${idProducto}, ${img.id_imagen})'>&times;</button>` : ''}
+                </div>
+            `;
+        });
+    } catch (err) {
+        console.error('Error cargando imágenes', err);
+    }
+}
+
+
+
 /**
  * Maneja el submit del formulario
  */
 const manejarSubmitFormulario = async (e) => {
-    e.preventDefault();
-    
-    if (window.productoEditando === 'view') {
-        cerrarModal();
-        return;
-    }
-    
     try {
-        const formData = new FormData(e.target);
+        const form = e.target;
+        const formData = new FormData(form);
         const datos = {
             nombre_producto: formData.get('nombre_producto'),
             descripcion: formData.get('descripcion'),
@@ -541,21 +583,52 @@ const manejarSubmitFormulario = async (e) => {
             id_proveedor: formData.get('id_proveedor') ? parseInt(formData.get('id_proveedor')) : null,
             estado: formData.get('estado')
         };
-        
+
         if (!validarFormulario(datos)) {
             return;
         }
-        
+
         let response;
+        let productoId;
         if (window.productoEditando) {
             // Actualizar producto existente
             response = await api.put(`/productos/${window.productoEditando}`, datos);
+            productoId = window.productoEditando;
         } else {
             // Crear nuevo producto
             response = await api.post('/productos', datos);
+            productoId = response.data?.data?.id_producto;
         }
-        
+
         if (response.success) {
+            // Obtener el input file directamente
+            const inputImagen = document.getElementById('imagenProducto');
+            const imagenFile = inputImagen && inputImagen.files && inputImagen.files[0] ? inputImagen.files[0] : null;
+            if (imagenFile && productoId) {
+                const imagenForm = new FormData();
+                imagenForm.append('imagen', imagenFile);
+                try {
+                    console.log("1");
+                    const resp = await fetch(`http://localhost:3000/api/productos/${productoId}/imagenes`, {
+                        method: 'POST',
+                        headers: {
+                            // No se pone Content-Type, fetch lo gestiona con FormData
+                            'Authorization': `Bearer ${userManager.obtenerToken()}`
+                        },
+                        body: imagenForm
+                    });
+                    console.log("2");
+                    const imagenResp = await resp.json();
+                    console.log(imagenResp);
+                    if (!resp.ok || !imagenResp || imagenResp.error) {
+                        await error(imagenResp.error || 'La imagen no se pudo subir');
+                    }
+                } catch (err) {
+                    await error('Error al subir la imagen');
+                }
+            } else if (inputImagen && inputImagen.value && !imagenFile) {
+                mostrarError('errorImagenProducto', 'Selecciona una imagen válida');
+            }
             const mensaje = window.productoEditando ? 'Producto actualizado exitosamente' : 'Producto creado exitosamente';
             await success(mensaje);
             cerrarModal();
@@ -563,11 +636,12 @@ const manejarSubmitFormulario = async (e) => {
         } else {
             await error(response.message || 'Error al guardar el producto');
         }
-        
+
     } catch (err) {
         console.error('Error guardando producto:', err);
         await error('Error al guardar el producto');
     }
+
 };
 
 /**

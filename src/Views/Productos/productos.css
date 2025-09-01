@@ -1,3 +1,64 @@
+:root {
+    --color-primary: #3b82f6;
+    --color-secondary: #64748b;
+    --color-success: #10b981;
+    --color-danger: #ef4444;
+    --color-warning: #f59e42;
+    --color-bg: #f8f9fa;
+    --color-card: #fff;
+    --color-border: #e5e7eb;
+    --color-text: #1f2937;
+    --font-main: 'Inter', Arial, sans-serif;
+    --radius: 12px;
+    --space: 1rem;
+}
+/* Galería de imágenes de producto en el modal */
+.imagenes-producto-lista {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+.imagen-item {
+    position: relative;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    background: #f9fafb;
+    padding: 8px;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.imagen-item img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+.imagen-eliminar-btn {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    background: #ef4444;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.85;
+    transition: background 0.2s;
+}
+.imagen-eliminar-btn:hover {
+    background: #dc2626;
+    opacity: 1;
+}
 .productos-page-container {
     min-height: 100vh;
     background: #f8f9fa;
