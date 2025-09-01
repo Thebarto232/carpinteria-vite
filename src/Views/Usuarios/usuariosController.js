@@ -603,6 +603,8 @@ const manejarSubmitFormulario = async (e) => {
 const validarFormulario = (datos) => {
     limpiarErrores();
     let esValido = true;
+
+    console.log('Validando datos:', datos);
     
     if (!datos.nombre_usuario) {
         mostrarError('errorNombres', 'El nombre completo es obligatorio');

@@ -315,8 +315,9 @@
 
 .categorias-page-container .error-message {
     color: #ef4444;
-    font-size: 12px;
-    margin-top: 5px;
+    font-size: 0.9em;
+    margin-top: 2px;
+    min-height: 18px;
 }
 
 .modal-footer {
