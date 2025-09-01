@@ -12,6 +12,9 @@ import { categoriasController } from '../Views/Categorias/categoriasController.j
 import { proveedoresController } from '../Views/Proveedores/proveedoresController.js';
 import { productosController } from '../Views/Productos/productosController.js';
 import { tiendaController } from '../Views/Tienda/tiendaController.js';
+import { comprasController } from '../Views/Compras/comprasController.js';
+import { misComprasController } from '../Views/Compras/misComprasController.js';
+import { facturasController } from '../Views/Facturas/facturasController.js';
 
 /**
  * Definición de rutas de la aplicación
@@ -89,5 +92,27 @@ export const routes = {
     path: "Tienda/index.html",
     controlador: tiendaController,
     private: false
+  },
+
+  // Finalizar compra desde carrito (requiere autenticación)
+  Compras: {
+    path: "Compras/index.html",
+    controlador: comprasController,
+    private: true
+  },
+
+  // Historial de compras del usuario (requiere autenticación)
+  MisCompras: {
+    path: "Compras/mis-compras.html",
+    controlador: misComprasController,
+    private: true
+  },
+
+  // Gestión de facturas (requiere autenticación y permiso)
+  Facturas: {
+    path: "Facturas/index.html",
+    controlador: facturasController,
+    private: true,
+    can: 'leer_facturas'
   }
 };

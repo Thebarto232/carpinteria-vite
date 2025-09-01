@@ -2,7 +2,7 @@
  * Controlador para la página de inicio de sesión
  * Maneja la lógica de autenticación y validación del formulario
  */
-
+import './login.css';
 import * as api from "../../../Helpers/api.js";
 import { manejarErrores } from "../../../Helpers/manejoErrores.js";
 import * as validacion from "../../../Helpers/validaciones.js";

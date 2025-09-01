@@ -1,0 +1,454 @@
+.productos-page-container {
+    min-height: 100vh;
+    background: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+.productos-content {
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Header */
+.productos-header {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border: 1px solid #e5e7eb;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.productos-page-container .productos-header-left h1 {
+    color: #1f2937;
+    font-size: 1.8rem;
+    margin: 0 0 0.5rem 0;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.productos-page-container .productos-header-subtitle {
+    color: #6b7280;
+    font-size: 1rem;
+    margin: 0;
+}
+
+.productos-page-container .productos-header-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+/* Botones */
+.productos-page-container .btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+}
+
+.productos-page-container .btn-primary {
+    background: #3b82f6;
+    color: white;
+}
+
+.productos-page-container .btn-primary:hover {
+    background: #2563eb;
+    transform: translateY(-1px);
+}
+
+.productos-page-container .btn-secondary {
+    background: #6b7280;
+    color: white;
+}
+
+.productos-page-container .btn-secondary:hover {
+    background: #4b5563;
+}
+
+.productos-page-container .btn-success {
+    background: #10b981;
+    color: white;
+}
+
+.productos-page-container .btn-success:hover {
+    background: #059669;
+}
+
+.productos-page-container .btn-danger {
+    background: #ef4444;
+    color: white;
+}
+
+.productos-page-container .btn-danger:hover {
+    background: #dc2626;
+}
+
+.productos-page-container .btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+.productos-page-container .btn-sm {
+    padding: 6px 12px;
+    font-size: 12px;
+}
+
+/* Contenedor principal */
+.productos-container {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border: 1px solid #e5e7eb;
+}
+
+/* Filtros */
+.productos-filters {
+    background: #f9fafb;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    border: 1px solid #e5e7eb;
+}
+
+.filters-row {
+    display: grid;
+    grid-template-columns: 1fr 200px 200px 150px;
+    gap: 1rem;
+    align-items: end;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.filter-group label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #374151;
+    margin-bottom: 0.25rem;
+}
+
+/* Tabla */
+.productos-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.productos-table th {
+    background: #f9fafb;
+    padding: 15px 12px;
+    text-align: left;
+    font-weight: 600;
+    color: #374151;
+    border-bottom: 2px solid #e5e7eb;
+}
+
+.productos-table td {
+    padding: 12px;
+    border-bottom: 1px solid #e5e7eb;
+    vertical-align: middle;
+}
+
+.productos-table tr:hover {
+    background: #f9fafb;
+}
+
+.producto-info strong {
+    display: block;
+    color: #111827;
+    margin-bottom: 0.25rem;
+}
+
+.producto-info small {
+    color: #6b7280;
+    font-size: 0.875rem;
+}
+
+.precio {
+    font-weight: 600;
+    color: #059669;
+}
+
+.stock {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    background: #e5e7eb;
+    color: #374151;
+}
+
+.stock-bajo {
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+.badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.badge-success {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.badge-danger {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.badge-warning {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.badge-secondary {
+    background: #f3f4f6;
+    color: #6b7280;
+}
+
+.productos-page-container .actions {
+    display: flex;
+    gap: 8px;
+}
+
+/* Estados de carga y vacío */
+.productos-page-container .loading {
+    text-align: center;
+    padding: 40px;
+    color: #6b7280;
+}
+
+.productos-page-container .empty-state {
+    text-align: center;
+    padding: 40px;
+    color: #6b7280;
+}
+
+.productos-page-container .empty-state i {
+    font-size: 48px;
+    margin-bottom: 15px;
+    color: #d1d5db;
+}
+
+/* Modales */
+.productos-page-container .modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    backdrop-filter: blur(5px);
+}
+
+.productos-page-container .modal.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.productos-page-container .modal-content {
+    background: white;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 700px;
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: modalSlide 0.3s ease;
+}
+
+@keyframes modalSlide {
+    from {
+    opacity: 0;
+    transform: translateY(-20px);
+    }
+    to {
+    opacity: 1;
+    transform: translateY(0);
+    }
+}
+
+.productos-page-container .modal-header {
+    padding: 20px 20px 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.productos-page-container .modal-header h3 {
+    color: #1f2937;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+}
+
+.productos-page-container .close {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #6b7280;
+    padding: 5px;
+    border-radius: 4px;
+    transition: background 0.3s ease;
+}
+
+.productos-page-container .close:hover {
+    background: #f3f4f6;
+    color: #1f2937;
+}
+
+.productos-page-container .modal-body {
+    padding: 0 20px 20px 20px;
+}
+
+.productos-page-container .form-group {
+    margin-bottom: 20px;
+}
+
+.productos-page-container .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.productos-page-container .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #374151;
+}
+
+.productos-page-container .form-control {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e5e7eb;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+.productos-page-container .form-control:focus {
+    outline: none;
+    border-color: #3b82f6;
+}
+
+.productos-page-container .form-control.error {
+    border-color: #ef4444;
+}
+
+.productos-page-container .error-message {
+    color: #ef4444;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.modal-footer {
+    padding: 15px 20px 20px 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    border-top: 1px solid #e5e7eb;
+    margin-top: 20px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.warning-icon {
+    margin-bottom: 15px;
+    color: #f59e0b;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .productos-content {
+    padding: 1rem;
+    }
+    
+    .productos-header {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+    }
+
+    .productos-page-container .productos-header-actions {
+    flex-direction: column;
+    width: 100%;
+    }
+
+    .filters-row {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    }
+
+    .productos-table {
+    font-size: 0.875rem;
+    }
+
+    .productos-table th,
+    .productos-table td {
+    padding: 8px 6px;
+    }
+
+    .productos-page-container .actions {
+    flex-direction: column;
+    }
+
+    .productos-page-container .modal-content {
+    width: 95%;
+    margin: 10px;
+    }
+
+    .productos-page-container .form-row {
+    grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 1024px) {
+    .filters-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    }
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}

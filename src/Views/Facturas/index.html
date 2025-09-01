@@ -1,0 +1,112 @@
+<div class="facturas-page-container">
+  <!-- Navegación del Dashboard -->
+  <div id="dashboardNav"></div>
+  
+  <!-- Contenido Principal -->
+  <div class="facturas-content">
+    <!-- Header -->
+    <div class="facturas-header">
+      <div class="facturas-header-left">
+        <h1>
+          <i data-lucide="file-text"></i>
+          Gestión de Facturas
+        </h1>
+        <p class="facturas-header-subtitle">Visualiza y gestiona todas las facturas del sistema</p>
+      </div>
+      <div class="facturas-header-actions">
+        <button class="btn btn-secondary" id="btnRefresh">
+          <i data-lucide="refresh-cw"></i>
+          Actualizar
+        </button>
+      </div>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="facturas-container">
+      <!-- Sección de filtros -->
+      <div class="filters-section">
+        <div class="search-group">
+          <input 
+            type="text" 
+            id="searchInput" 
+            class="search-input" 
+            placeholder="Buscar por número de factura o cliente..."
+          >
+        </div>
+        <div class="filter-group">
+          <label for="filtroEstado">Estado:</label>
+          <select id="filtroEstado" class="form-control">
+            <option value="">Todos los estados</option>
+            <option value="GENERADA">Generada</option>
+            <option value="ENVIADA">Enviada</option>
+            <option value="PAGADA">Pagada</option>
+            <option value="CANCELADA">Cancelada</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="filtroFecha">Período:</label>
+          <select id="filtroFecha" class="form-control">
+            <option value="">Todas las fechas</option>
+            <option value="7">Últimos 7 días</option>
+            <option value="30">Últimos 30 días</option>
+            <option value="90">Últimos 90 días</option>
+            <option value="365">Último año</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Tabla de facturas -->
+      <div id="facturasTableContainer">
+        <!-- El contenido se carga dinámicamente -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal para ver detalles de factura -->
+  <div id="modalFactura" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modalTitleText">
+          <i data-lucide="file-text"></i>
+          Detalles de Factura
+        </h3>
+        <button class="close" id="closeModal">&times;</button>
+      </div>
+      
+      <div class="modal-body" id="modalBody">
+        <!-- El contenido se carga dinámicamente -->
+      </div>
+
+      <div class="modal-footer" id="modalFooter">
+        <button type="button" class="btn btn-secondary" id="btnCancelar">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de confirmación para eliminar -->
+  <div id="modalConfirmar" class="modal">
+    <div class="modal-content" style="max-width: 400px;">
+      <div class="modal-header">
+        <h3>
+          <i data-lucide="alert-triangle"></i>
+          Confirmar Eliminación
+        </h3>
+        <button class="close" id="closeModalConfirmar">&times;</button>
+      </div>
+      
+      <div class="modal-body">
+        <div id="mensajeConfirmacion">
+          <!-- El mensaje se carga dinámicamente -->
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" id="btnCancelarEliminar">Cancelar</button>
+        <button type="button" class="btn btn-danger" id="btnConfirmarEliminar">
+          <i data-lucide="trash-2"></i>
+          Eliminar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

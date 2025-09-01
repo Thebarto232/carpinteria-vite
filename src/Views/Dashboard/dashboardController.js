@@ -3,6 +3,7 @@
  * Maneja la lógica del panel de administración usando componentes modulares
  */
 
+import './dashboard.css';
 import { DashboardNavigation } from "../../Components/Navigation/DashboardNavigation.js";
 import { DashboardStats } from "../../Components/Dashboard/DashboardStats.js";
 import { userManager } from "../../Helpers/userManager.js";

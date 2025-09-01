@@ -1,0 +1,110 @@
+<div class="compras-container">
+  <!-- Navegación pública -->
+  <div id="publicNavContainer"></div>
+
+  <!-- Hero Section de Compras -->
+  <section class="compras-hero">
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1 class="hero-title">
+          <i data-lucide="credit-card" width="40" height="40" style="color: #3b82f6;"></i>
+          Finalizar Compra
+        </h1>
+        <p class="hero-subtitle">
+          Revisa tu pedido y procede con el pago de forma segura
+        </p>
+      </div>
+      <div class="hero-actions">
+        <a href="#Tienda" class="btn-secondary">
+          <i data-lucide="arrow-left" width="20" height="20"></i>
+          Seguir Comprando
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contenido principal -->
+  <section class="checkout-section">
+    <div class="checkout-container">
+      <!-- Loading estado inicial -->
+      <div id="comprasLoading" class="loading-container">
+        <div class="loading-spinner"></div>
+        <p>Cargando carrito...</p>
+      </div>
+
+      <!-- Mensaje de carrito vacío -->
+      <div id="carritoVacio" class="carrito-vacio" style="display: none;">
+        <div class="vacio-icon">🛒</div>
+        <h2>Tu carrito está vacío</h2>
+        <p>Agrega algunos productos antes de proceder a la compra.</p>
+        <a href="#Tienda" class="btn-primary">Ir a la Tienda</a>
+      </div>
+
+      <!-- Contenido principal del checkout -->
+      <div id="checkoutContent" class="checkout-content" style="display: none;">
+        <!-- Resumen del pedido -->
+        <div class="pedido-resumen">
+          <h2>
+            <i data-lucide="package" width="24" height="24"></i>
+            Resumen de tu Pedido
+          </h2>
+          <div id="itemsCarrito" class="items-lista">
+            <!-- Items del carrito se cargarán aquí -->
+          </div>
+        </div>
+
+        <!-- Panel de pago -->
+        <div class="pago-panel">
+          <div class="total-section">
+            <div class="subtotal">
+              <span>Subtotal:</span>
+              <span id="subtotalAmount">$0.00</span>
+            </div>
+            <div class="impuestos">
+              <span>Impuestos (16%):</span>
+              <span id="impuestosAmount">$0.00</span>
+            </div>
+            <div class="total-final">
+              <span>Total a Pagar:</span>
+              <span id="totalAmount">$0.00</span>
+            </div>
+          </div>
+
+          <div class="acciones-compra">
+            <button id="btnProcesarCompra" class="btn-primary btn-large">
+              <i data-lucide="credit-card" width="20" height="20"></i>
+              Procesar Compra
+            </button>
+            <button id="btnVaciarCarrito" class="btn-danger">
+              <i data-lucide="trash-2" width="16" height="16"></i>
+              Vaciar Carrito
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Resultado exitoso -->
+      <div id="compraExitosa" class="compra-exitosa" style="display: none;">
+        <div class="exito-header">
+          <div class="exito-icon">✅</div>
+          <h1>¡Compra Realizada Exitosamente!</h1>
+        </div>
+
+        <div id="compraDetalles" class="compra-detalles">
+          <!-- Detalles se cargarán aquí -->
+        </div>
+
+        <div class="acciones-final">
+          <a href="#MisCompras" class="btn-primary">
+            <i data-lucide="shopping-bag" width="16" height="16"></i>
+            Ver Mis Compras
+          </a>
+          <a href="#Tienda" class="btn-secondary">
+            <i data-lucide="shopping-cart" width="16" height="16"></i>
+            Seguir Comprando
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

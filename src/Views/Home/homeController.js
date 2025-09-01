@@ -2,7 +2,7 @@
  * Controlador para la página de inicio
  * Maneja la lógica de la página principal y redirecciones
  */
-
+import './home.css';
 import { PublicNavigation } from '../../Components/Navigation/PublicNavigation.js';
 
 /**

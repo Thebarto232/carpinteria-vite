@@ -3,6 +3,7 @@
  * Maneja el CRUD completo de roles con validación de permisos
  */
 
+import './roles.css';
 import { error, success, confirm } from "../../Helpers/alertas.js";
 import * as api from "../../Helpers/api.js";
 import { userManager } from "../../Helpers/userManager.js";

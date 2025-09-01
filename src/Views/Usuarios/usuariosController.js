@@ -3,6 +3,7 @@
  * Maneja el CRUD completo de usuarios con validación de permisos
  */
 
+import './usuarios.css';
 import { error, success, confirm } from "../../Helpers/alertas.js";
 import * as api from "../../Helpers/api.js";
 import { userManager } from "../../Helpers/userManager.js";

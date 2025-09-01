@@ -3,6 +3,7 @@
  * Maneja el CRUD completo de categorías con validación de permisos
  */
 
+import './categorias.css'
 import { DashboardNavigation } from '../../Components/Navigation/DashboardNavigation.js';
 import { userManager } from '../../Helpers/userManager.js';
 import * as api from '../../Helpers/api.js';

@@ -3,6 +3,7 @@
  * Maneja la visualización de productos y funcionalidad del carrito
  */
 
+import './tienda.css';
 import { PublicNavigation } from '../../Components/Navigation/PublicNavigation.js';
 import { userManager } from '../../Helpers/userManager.js';
 import * as api from '../../Helpers/api.js';
@@ -175,7 +176,7 @@ const cargarCategorias = async () => {
     try {
         const response = await api.get('/categorias/simple');
         if (response.success) {
-            categoriasDisponibles = response.data;
+            categoriasDisponibles = response.data.data;
             llenarSelectCategorias();
         }
     } catch (err) {
@@ -190,7 +191,7 @@ const cargarProveedores = async () => {
     try {
         const response = await api.get('/proveedores/simple');
         if (response.success) {
-            proveedoresDisponibles = response.data;
+            proveedoresDisponibles = response.data.data
             llenarSelectProveedores();
         }
     } catch (err) {
@@ -627,12 +628,22 @@ const procederCompra = async () => {
             return;
         }
         
-        // TODO: Implementar proceso de compra
-        await success('Funcionalidad de compra en desarrollo');
+        // Verificar autenticación
+        if (!userManager.obtenerUsuario()) {
+            await error('Debes iniciar sesión para proceder con la compra');
+            location.hash = '#Login';
+            return;
+        }
+        
+        // Cerrar modal del carrito
+        cerrarModalCarrito();
+        
+        // Navegar a la página de compras
+        location.hash = '#Compras';
         
     } catch (err) {
         console.error('Error procesando compra:', err);
-        await error('Error al procesar la compra');
+        await error('Error al proceder con la compra');
     }
 };
 

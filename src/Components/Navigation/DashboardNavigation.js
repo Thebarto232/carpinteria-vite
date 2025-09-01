@@ -92,6 +92,18 @@ export class DashboardNavigation {
               <i data-lucide="users" width="16" height="16"></i>
               Usuarios
             </button>
+            <button class="nav-btn" data-section="compras">
+              <i data-lucide="credit-card" width="16" height="16"></i>
+              Comprar
+            </button>
+            <button class="nav-btn" data-section="mis-compras">
+              <i data-lucide="shopping-bag" width="16" height="16"></i>
+              Mis Compras
+            </button>
+            <button class="nav-btn" data-section="facturas">
+              <i data-lucide="file-text" width="16" height="16"></i>
+              Facturas
+            </button>
           </nav>
         </div>
         
@@ -341,6 +353,18 @@ export class DashboardNavigation {
         break;
       case 'usuarios':
         window.location.hash = '#Usuarios';
+        break;
+      case 'tienda':
+        window.location.hash = '#Tienda';
+        break;
+      case 'compras':
+        window.location.hash = '#Compras';
+        break;
+      case 'mis-compras':
+        window.location.hash = '#MisCompras';
+        break;
+      case 'facturas':
+        window.location.hash = '#Facturas';
         break;
       default:
         console.warn(`Sección no reconocida: ${section}`);
