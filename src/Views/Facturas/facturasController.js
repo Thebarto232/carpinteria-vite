@@ -306,6 +306,7 @@ const verDetallesFactura = async (idFactura) => {
         const response = await api.get(`/facturas/${idFactura}`);
         
         if (response.success) {
+            console.log(response.data);
             mostrarModalDetalles(response.data.factura);
         } else {
             throw new Error(response.message || 'Error al cargar detalles');
@@ -411,7 +412,7 @@ const mostrarModalDetalles = (factura) => {
                             <tbody>
                                 ${factura.items.map(item => `
                                     <tr>
-                                        <td>${item.producto_nombre}</td>
+                                        <td>${item.nombre_producto}</td>
                                         <td>${item.cantidad}</td>
                                         <td>$${parseFloat(item.precio_unitario).toFixed(2)}</td>
                                         <td>$${parseFloat(item.subtotal).toFixed(2)}</td>
@@ -463,7 +464,6 @@ const descargarFactura = async (idFactura) => {
                 'Authorization': `Bearer ${token}`
             }
         });
-
         if (!response.ok) {
             let errorMessage = 'Error al descargar factura';
             try {

@@ -207,11 +207,9 @@ const calcularTotales = () => {
         return sum + subtotal;
     }, 0);
 
-    const impuestos = total * 0.16;
-    const totalFinal = total + impuestos;
+    const totalFinal = total;
 
     document.getElementById('subtotalAmount').textContent = `$${total.toFixed(2)}`;
-    document.getElementById('impuestosAmount').textContent = `$${impuestos.toFixed(2)}`;
     document.getElementById('totalAmount').textContent = `$${totalFinal.toFixed(2)}`;
 };
 
