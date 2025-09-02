@@ -1,4 +1,3 @@
-
 /**
  * Controlador para la gestión de productos
  * Maneja el CRUD completo de productos con validación de permisos
@@ -374,6 +373,20 @@ const abrirModalCrear = () => {
     
     // Habilitar campos
     habilitarCampos(false);
+    // Mostrar input de imágenes en modo crear
+    const inputImagen = document.getElementById('imagenProducto');
+    if (inputImagen) {
+        inputImagen.style.display = '';
+    }
+    
+    // Limpiar previews y contenedor de imágenes
+    const preview = document.getElementById('previewImagenProducto');
+    if (preview) preview.innerHTML = '';
+    const contenedor = document.getElementById('imagenesProducto');
+    if (contenedor) contenedor.innerHTML = '';
+    if (inputImagen) {
+        inputImagen.value = '';
+    }
     
     // Configurar botón guardar
     const btnGuardar = document.getElementById('btnGuardar');
@@ -433,6 +446,11 @@ const editarProducto = async (idProducto) => {
         
         // Habilitar campos
         habilitarCampos(false);
+        // Mostrar input de imágenes en modo editar
+        const inputImagen = document.getElementById('imagenProducto');
+        if (inputImagen) {
+            inputImagen.style.display = '';
+        }
         
         // Configurar botón guardar
         const btnGuardar = document.getElementById('btnGuardar');
@@ -485,6 +503,11 @@ const verDetallesProducto = async (idProducto) => {
         
         // Deshabilitar campos
         habilitarCampos(true);
+        // Ocultar input de imágenes en modo vista
+        const inputImagen = document.getElementById('imagenProducto');
+        if (inputImagen) {
+            inputImagen.style.display = 'none';
+        }
         
         // Configurar botón guardar
         const btnGuardar = document.getElementById('btnGuardar');
@@ -571,6 +594,7 @@ async function cargarImagenesProducto(idProducto) {
  * Maneja el submit del formulario
  */
 const manejarSubmitFormulario = async (e) => {
+    e.preventDefault();
     try {
         const form = e.target;
         const formData = new FormData(form);
@@ -603,30 +627,28 @@ const manejarSubmitFormulario = async (e) => {
         if (response.success) {
             // Obtener el input file directamente
             const inputImagen = document.getElementById('imagenProducto');
-            const imagenFile = inputImagen && inputImagen.files && inputImagen.files[0] ? inputImagen.files[0] : null;
-            if (imagenFile && productoId) {
-                const imagenForm = new FormData();
-                imagenForm.append('imagen', imagenFile);
-                try {
-                    console.log("1");
-                    const resp = await fetch(`http://localhost:3000/api/productos/${productoId}/imagenes`, {
-                        method: 'POST',
-                        headers: {
-                            // No se pone Content-Type, fetch lo gestiona con FormData
-                            'Authorization': `Bearer ${userManager.obtenerToken()}`
-                        },
-                        body: imagenForm
-                    });
-                    console.log("2");
-                    const imagenResp = await resp.json();
-                    console.log(imagenResp);
-                    if (!resp.ok || !imagenResp || imagenResp.error) {
-                        await error(imagenResp.error || 'La imagen no se pudo subir');
+            const imagenFiles = inputImagen && inputImagen.files ? inputImagen.files : null;
+            if (imagenFiles && imagenFiles.length > 0 && productoId) {
+                for (let i = 0; i < imagenFiles.length; i++) {
+                    const imagenForm = new FormData();
+                    imagenForm.append('imagen', imagenFiles[i]);
+                    try {
+                        const resp = await fetch(`http://localhost:3000/api/productos/${productoId}/imagenes`, {
+                            method: 'POST',
+                            headers: {
+                                'Authorization': `Bearer ${userManager.obtenerToken()}`
+                            },
+                            body: imagenForm
+                        });
+                        const imagenResp = await resp.json();
+                        if (!resp.ok || !imagenResp || imagenResp.error) {
+                            await error(imagenResp.error || `La imagen ${imagenFiles[i].name} no se pudo subir`);
+                        }
+                    } catch (err) {
+                        await error(`Error al subir la imagen ${imagenFiles[i].name}`);
                     }
-                } catch (err) {
-                    await error('Error al subir la imagen');
                 }
-            } else if (inputImagen && inputImagen.value && !imagenFile) {
+            } else if (inputImagen && inputImagen.value && (!imagenFiles || imagenFiles.length === 0)) {
                 mostrarError('errorImagenProducto', 'Selecciona una imagen válida');
             }
             const mensaje = window.productoEditando ? 'Producto actualizado exitosamente' : 'Producto creado exitosamente';
