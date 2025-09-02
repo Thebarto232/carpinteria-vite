@@ -172,27 +172,39 @@ export class PublicNavigation {
     }
 
     /**
-     * Cierra la sesión del usuario
+     * Maneja el proceso de cerrar sesión
      */
     async cerrarSesion() {
-        try {
-            // Limpiar datos del usuario
-            userManager.cerrarSesion();
-            
-            // Mostrar mensaje de confirmación
-            if (typeof success !== 'undefined') {
-                await success('Sesión cerrada exitosamente');
-            }
-            
-            // Redirigir al inicio
-            location.hash = '#Home';
-            
-        } catch (error) {
-            console.error('Error cerrando sesión:', error);
-            if (typeof error !== 'undefined') {
-                await error('Error al cerrar sesión');
-            }
-        }
+    try {
+        const confirmacion = await confirm(
+        '¿Estás seguro de que deseas cerrar sesión?',
+        'Sí, cerrar sesión',
+        'Cancelar'
+        );
+        
+        if (!confirmacion) return;
+
+        // Llamar al endpoint de logout
+        await api.post('/auth/logout', {});
+        
+        // Limpiar localStorage
+        localStorage.clear();
+        
+        // Disparar evento de cambio de autenticación
+        const eventoAuth = new CustomEvent('authStateChanged', {
+        detail: { usuario: null, autenticado: false },
+        bubbles: true
+        });
+        document.dispatchEvent(eventoAuth);
+        
+        // Redirigir al login
+        location.hash = '#Login';
+        
+    } catch (error) {
+        console.error('Error al cerrar sesión:', error);
+        localStorage.clear();
+        location.hash = '#Login';
+    }
     }
 
     /**
