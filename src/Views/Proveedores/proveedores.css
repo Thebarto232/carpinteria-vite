@@ -1,31 +1,31 @@
 .proveedores-page-container {
     min-height: 100vh;
-    background: #f8f9fa;
+    background: var(--color-bg);
     margin: 0;
     padding: 0;
 }
 
 .proveedores-content {
-    padding: 2rem;
+    padding: var(--space) 2rem;
     max-width: 1200px;
     margin: 0 auto;
 }
 
 /* Header */
 .proveedores-header {
-    background: white;
-    border-radius: 12px;
+    background: var(--color-card);
+    border-radius: var(--radius);
     padding: 2rem;
     margin-bottom: 2rem;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    border: 1px solid #e5e7eb;
+    border: 1px solid var(--color-border);
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
 .proveedores-page-container .proveedores-header-left h1 {
-    color: #1f2937;
+    color: var(--color-text);
     font-size: 1.8rem;
     margin: 0 0 0.5rem 0;
     font-weight: 700;
@@ -35,7 +35,7 @@
 }
 
 .proveedores-page-container .proveedores-header-subtitle {
-    color: #6b7280;
+    color: var(--color-secondary);
     font-size: 1rem;
     margin: 0;
 }
@@ -61,40 +61,40 @@
 }
 
 .proveedores-page-container .btn-primary {
-    background: #3b82f6;
-    color: white;
+    background: var(--color-primary);
+    color: var(--color-bg-inverse);
 }
 
 .proveedores-page-container .btn-primary:hover {
-    background: #2563eb;
+    background: var(--color-primary-dark);
     transform: translateY(-1px);
 }
 
 .proveedores-page-container .btn-secondary {
-    background: #6b7280;
-    color: white;
+    background: var(--color-secondary);
+    color: var(--color-bg-inverse);
 }
 
 .proveedores-page-container .btn-secondary:hover {
-    background: #4b5563;
+    background: var(--color-muted-dark);
 }
 
 .proveedores-page-container .btn-success {
-    background: #10b981;
-    color: white;
+    background: var(--color-success);
+    color: var(--color-bg-inverse);
 }
 
 .proveedores-page-container .btn-success:hover {
-    background: #059669;
+    background: var(--color-success-dark);
 }
 
 .proveedores-page-container .btn-danger {
-    background: #ef4444;
-    color: white;
+    background: var(--color-danger);
+    color: var(--color-bg-inverse);
 }
 
 .proveedores-page-container .btn-danger:hover {
-    background: #dc2626;
+    background: var(--color-danger-dark);
 }
 
 .proveedores-page-container .btn:disabled {
@@ -110,11 +110,11 @@
 
 /* Contenedor principal */
 .proveedores-container {
-    background: white;
-    border-radius: 12px;
+    background: var(--color-card);
+    border-radius: var(--radius);
     padding: 2rem;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    border: 1px solid #e5e7eb;
+    border: 1px solid var(--color-border);
 }
 
 /* Sección de búsqueda */
@@ -128,7 +128,7 @@
 .search-input {
     flex: 1;
     padding: 12px;
-    border: 2px solid #e5e7eb;
+    border: 2px solid var(--color-border);
     border-radius: 6px;
     font-size: 14px;
     transition: border-color 0.3s ease;
@@ -136,36 +136,36 @@
 
 .search-input:focus {
     outline: none;
-    border-color: #3b82f6;
+    border-color: var(--color-primary);
 }
 
 /* Tabla */
 .proveedores-table {
     width: 100%;
     border-collapse: collapse;
-    background: white;
+    background: var(--color-card);
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
 .proveedores-table th {
-    background: #f9fafb;
+    background: var(--color-bg);
     padding: 15px 12px;
     text-align: left;
     font-weight: 600;
-    color: #374151;
-    border-bottom: 2px solid #e5e7eb;
+    color: var(--color-text-dark);
+    border-bottom: 2px solid var(--color-border);
 }
 
 .proveedores-table td {
     padding: 12px;
-    border-bottom: 1px solid #e5e7eb;
+    border-bottom: 1px solid var(--color-border);
     vertical-align: middle;
 }
 
 .proveedores-table tr:hover {
-    background: #f9fafb;
+    background: var(--color-bg);
 }
 
 .proveedores-page-container .actions {
@@ -182,27 +182,27 @@
 }
 
 .badge-info {
-    background: #dbeafe;
-    color: #1e40af;
+    background: var(--color-info-bg);
+    color: var(--color-info-text);
 }
 
 /* Estados de carga y vacío */
 .proveedores-page-container .loading {
     text-align: center;
     padding: 40px;
-    color: #6b7280;
+    color: var(--color-secondary);
 }
 
 .proveedores-page-container .empty-state {
     text-align: center;
     padding: 40px;
-    color: #6b7280;
+    color: var(--color-secondary);
 }
 
 .proveedores-page-container .empty-state i {
     font-size: 48px;
     margin-bottom: 15px;
-    color: #d1d5db;
+    color: var(--color-icon-muted);
 }
 
 /* Modales */
@@ -225,7 +225,7 @@
 }
 
 .proveedores-page-container .modal-content {
-    background: white;
+    background: var(--color-card);
     border-radius: 10px;
     width: 90%;
     max-width: 600px;
@@ -250,13 +250,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #e5e7eb;
+    border-bottom: 1px solid var(--color-border);
     padding-bottom: 15px;
     margin-bottom: 20px;
 }
 
 .proveedores-page-container .modal-header h3 {
-    color: #1f2937;
+    color: var(--color-text);
     display: flex;
     align-items: center;
     gap: 10px;
@@ -268,15 +268,15 @@
     border: none;
     font-size: 24px;
     cursor: pointer;
-    color: #6b7280;
+    color: var(--color-secondary);
     padding: 5px;
     border-radius: 4px;
     transition: background 0.3s ease;
 }
 
 .proveedores-page-container .close:hover {
-    background: #f3f4f6;
-    color: #1f2937;
+    background: var(--color-bg-muted);
+    color: var(--color-text);
 }
 
 .proveedores-page-container .modal-body {
@@ -297,13 +297,13 @@
     display: block;
     margin-bottom: 8px;
     font-weight: 500;
-    color: #374151;
+    color: var(--color-text-dark);
 }
 
 .proveedores-page-container .form-control {
     width: 100%;
     padding: 12px;
-    border: 2px solid #e5e7eb;
+    border: 2px solid var(--color-border);
     border-radius: 6px;
     font-size: 14px;
     transition: border-color 0.3s ease;
@@ -312,15 +312,15 @@
 
 .proveedores-page-container .form-control:focus {
     outline: none;
-    border-color: #3b82f6;
+    border-color: var(--color-primary);
 }
 
 .proveedores-page-container .form-control.error {
-    border-color: #ef4444;
+    border-color: var(--color-danger);
 }
 
 .proveedores-page-container .error-message {
-    color: #ef4444;
+    color: var(--color-danger);
     font-size: 12px;
     margin-top: 5px;
 }
@@ -330,7 +330,7 @@
     display: flex;
     justify-content: flex-end;
     gap: 10px;
-    border-top: 1px solid #e5e7eb;
+    border-top: 1px solid var(--color-border);
     margin-top: 20px;
 }
 

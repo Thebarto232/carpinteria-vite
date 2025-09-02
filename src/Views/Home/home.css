@@ -33,7 +33,7 @@
     gap: 0.75rem;
     font-size: 1.25rem;
     font-weight: 700;
-    color: #1f2937;
+    color: var(--color-text);
     text-decoration: none;
 }
 
@@ -56,13 +56,13 @@
     padding: 0.5rem 1rem;
     border-radius: 8px;
     text-decoration: none;
-    color: #64748b;
+    color: var(--color-secondary);
     font-weight: 500;
     transition: all 0.2s ease;
 }
 
 .nav-link:hover {
-    color: #3b82f6;
+    color: var(--color-primary);
     background: rgba(59, 130, 246, 0.1);
 }
 
@@ -100,8 +100,8 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    background: #3b82f6;
-    color: white;
+    background: var(--color-primary);
+    color: #fff;
     border: none;
     padding: 0.75rem 1.5rem;
     border-radius: 8px;
@@ -118,7 +118,7 @@
 }
 
 .nav-button-secondary {
-    background: #64748b;
+    background: var(--color-secondary);
 }
 
 .nav-button-secondary:hover {
@@ -227,7 +227,7 @@
 
 /* Features Section */
 .features {
-    background: white;
+    background: var(--color-card);
     padding: 5rem 2rem;
 }
 
@@ -240,7 +240,7 @@
     text-align: center;
     font-size: 2.5rem;
     font-weight: 700;
-    color: #1f2937;
+    color: var(--color-text);
     margin-bottom: 3rem;
     display: flex;
     align-items: center;
@@ -255,17 +255,17 @@
 }
 
 .feature-card {
-    background: #f9fafb;
+    background: var(--color-bg);
     padding: 2rem;
     border-radius: 15px;
     text-align: center;
-    border: 2px solid #e5e7eb;
+    border: 2px solid var(--color-border);
     transition: all 0.3s ease;
 }
 
 .feature-card:hover {
-    background: white;
-    border-color: #3b82f6;
+    background: var(--color-card);
+    border-color: var(--color-primary);
     transform: translateY(-5px);
     box-shadow: 0 10px 30px rgba(59, 130, 246, 0.15);
 }
@@ -273,24 +273,24 @@
 .feature-icon {
     width: 64px;
     height: 64px;
-    background: #3b82f6;
+    background: var(--color-primary);
     border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: #fff;
     margin: 0 auto 1.5rem auto;
 }
 
 .feature-card h3 {
-    color: #1f2937;
+    color: var(--color-text);
     font-size: 1.25rem;
     font-weight: 600;
     margin-bottom: 1rem;
 }
 
 .feature-card p {
-    color: #6b7280;
+    color: var(--color-secondary);
     line-height: 1.6;
     margin: 0;
 }

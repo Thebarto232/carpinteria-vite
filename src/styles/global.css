@@ -1,0 +1,46 @@
+/* Custom properties globales  */
+:root {
+    --color-primary: #3b82f6;
+    --color-primary-dark: #2563eb;
+    --color-secondary: #64748b;
+    --color-success: #10b981;
+    --color-success-dark: #059669;
+    --color-danger: #ef4444;
+    --color-danger-dark: #dc2626;
+    --color-warning: #f59e42;
+    --color-bg: #f8f9fa;
+    --color-card: #fff;
+    --color-border: #e5e7eb;
+    --color-text: #1f2937;
+    --font-main: 'Inter', Arial, sans-serif;
+    --color-muted: #6b7280;
+    --color-muted-dark: #4b5563;
+    --radius: 12px;
+    --space: 1rem;
+    --shadow: 0 2px 10px rgba(0,0,0,0.1);
+    --shadow-lg: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+body {
+    font-family: var(--font-main);
+    background: var(--color-bg);
+    color: var(--color-text);
+    margin: 0;
+    padding: 0;
+}
+
+/* Utility classes */
+.text-primary { color: var(--color-primary); }
+.text-secondary { color: var(--color-secondary); }
+.text-success { color: var(--color-success); }
+.text-danger { color: var(--color-danger); }
+.text-warning { color: var(--color-warning); }
+.bg-card { background: var(--color-card); }
+.bg-primary { background: var(--color-primary); }
+.bg-secondary { background: var(--color-secondary); }
+.bg-success { background: var(--color-success); }
+.bg-danger { background: var(--color-danger); }
+.bg-warning { background: var(--color-warning); }
+.radius { border-radius: var(--radius); }
+.shadow { box-shadow: var(--shadow); }
+.shadow-lg { box-shadow: var(--shadow-lg); }

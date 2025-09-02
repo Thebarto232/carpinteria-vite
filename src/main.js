@@ -3,6 +3,7 @@
  * Inicializa el router y configura el sistema de navegación
  */
 
+import "./styles/global.css";
 import { router } from "./Router/router.js";
 
 // Variable global para el contenedor principal de la aplicación

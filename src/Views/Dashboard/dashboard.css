@@ -1,6 +1,6 @@
 .dashboard-container {
     min-height: 100vh;
-    background: #f8f9fa;
+    background: var(--color-bg);
     margin: 0;
     padding: 0;
 }
@@ -13,12 +13,12 @@
 
 /* Sección de Bienvenida */
 .welcome-section {
-    background: white;
+    background: var(--color-card);
     padding: 2rem;
-    border-radius: 12px;
+    border-radius: var(--radius);
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     margin-bottom: 2rem;
-    border: 1px solid #e5e7eb;
+    border: 1px solid var(--color-border);
 }
 
 .welcome-header {

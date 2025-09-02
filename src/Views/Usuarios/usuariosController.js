@@ -352,8 +352,6 @@ const abrirModalCrear = () => {
     // Mostrar campos de contraseña
     document.getElementById('passwordGroup').style.display = 'block';
     document.getElementById('confirmPasswordGroup').style.display = 'block';
-    document.getElementById('password').required = true;
-    document.getElementById('confirmPassword').required = true;
     
     // Habilitar campos
     habilitarCampos(true);
@@ -399,8 +397,6 @@ const editarUsuario = async (idUsuario) => {
         // Ocultar campos de contraseña en edición
         document.getElementById('passwordGroup').style.display = 'none';
         document.getElementById('confirmPasswordGroup').style.display = 'none';
-        document.getElementById('password').required = false;
-        document.getElementById('confirmPassword').required = false;
         
         // Configurar botón guardar
         const btnGuardar = document.getElementById('btnGuardar');
