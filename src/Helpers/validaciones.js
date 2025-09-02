@@ -106,7 +106,7 @@ export const validarCampos = (evento) => {
  * @param {string} email - Email a validar
  * @returns {boolean} true si el email es válido
  */
-const validarEmail = (email) => {
+export const validarEmail = (email) => {
   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return regex.test(email);
 };
@@ -117,18 +117,7 @@ const validarEmail = (email) => {
  * @param {string} mensaje - Mensaje de error
  */
 const mostrarError = (campo, mensaje) => {
-  campo.classList.add('is-invalid');
   
-  // Buscar o crear el elemento de feedback
-  let feedback = campo.parentNode.querySelector('.invalid-feedback');
-  if (!feedback) {
-    feedback = document.createElement('div');
-    feedback.className = 'invalid-feedback';
-    campo.parentNode.appendChild(feedback);
-  }
-  
-  feedback.textContent = mensaje;
-  feedback.style.display = 'block';
 };
 
 /**

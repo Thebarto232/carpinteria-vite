@@ -7,6 +7,7 @@ import * as api from "../../../Helpers/api.js";
 import { manejarErrores } from "../../../Helpers/manejoErrores.js";
 import * as validacion from "../../../Helpers/validaciones.js";
 import { success, error } from "../../../Helpers/alertas.js";
+import { userManager } from '../../../Helpers/userManager.js';
 
 /**
  * Función principal del controlador de Login
@@ -116,10 +117,39 @@ const configurarFormulario = () => {
  */
 const manejarLogin = async (evento) => {
   evento.preventDefault();
-  
-  // Validar todos los campos del formulario
-  if (!validacion.validarCampos(evento)) {
-    await error('Por favor, corrige los errores en el formulario');
+
+  // Obtener los campos
+  const emailInput = document.getElementById('email');
+  const passwordInput = document.getElementById('password');
+  const emailError = document.getElementById('emailError');
+  const passwordError = document.getElementById('passwordError');
+  let valid = true;
+
+  // Validar email
+  if (!emailInput.value.trim()) {
+    emailError.textContent = 'El correo es obligatorio.';
+    emailError.classList.add('show');
+    valid = false;
+  } else if (!validacion.validarEmail(emailInput.value.trim())) {
+    emailError.textContent = 'El correo no es válido.';
+    emailError.classList.add('show');
+    valid = false;
+  } else {
+    emailError.textContent = '';
+    emailError.classList.remove('show');
+  }
+
+  // Validar contraseña
+  if (!passwordInput.value.trim()) {
+    passwordError.textContent = 'La contraseña es obligatoria.';
+    passwordError.classList.add('show');
+    valid = false;
+  } else {
+    passwordError.textContent = '';
+    passwordError.classList.remove('show');
+  }
+
+  if (!valid) {
     return;
   }
 
@@ -129,20 +159,18 @@ const manejarLogin = async (evento) => {
   try {
     // Transformar los datos al formato que espera el backend
     const datosLogin = {
-      correo: validacion.datos.email,
-      contraseña: validacion.datos.password
+      correo: emailInput.value.trim(),
+      contraseña: passwordInput.value.trim()
     };
 
     // Realizar petición de login a la API
     const respuesta = await api.post('/auth/login', datosLogin, false);
-
+    console.log(respuesta);
     if (respuesta.success) {
       // Login exitoso - guardar datos en localStorage
       await guardarDatosUsuario(respuesta.data);
-      
       // Mostrar mensaje de éxito
       await success(respuesta.message || 'Inicio de sesión exitoso');
-      
       // Disparar evento personalizado para notificar cambio de estado
       const eventoAuth = new CustomEvent('authStateChanged', {
         detail: {
@@ -153,19 +181,21 @@ const manejarLogin = async (evento) => {
         cancelable: true
       });
       document.dispatchEvent(eventoAuth);
-      
       // Redirigir según permisos
       redirigirSegunPermisos(respuesta.data.usuario);
-      
     } else {
-      // Manejar errores de la API
-      await manejarErrores(respuesta);
+      if (respuesta.detalles) {
+        const message = respuesta.detalles[0].mensaje;
+        error(message || 'Error desconocido');
+      } else {
+        error(respuesta.message || 'Error desconocido');
+      }
+      
     }
-
   } catch (errorCapturado) {
-    console.error('Error en el proceso de login:', errorCapturado);
-    await error('Error de conexión. Por favor, intenta nuevamente.');
+    error(respuesta.message || 'Error desconocido');
   } finally {
+
     // Ocultar estado de carga
     mostrarCargando(false);
   }
@@ -200,6 +230,8 @@ const guardarDatosUsuario = async (data) => {
         localStorage.setItem('rol', JSON.stringify(data.usuario.rol));
       }
     }
+
+    userManager.cargarDatosLocales();
     
   } catch (error) {
     console.error('Error al guardar datos del usuario:', error);
