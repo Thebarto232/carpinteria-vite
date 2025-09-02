@@ -4,6 +4,7 @@
  */
 
 import { homeController } from '../Views/Home/homeController.js';
+import { registerController } from '../Views/Auth/Register/registerController.js';
 import { loginController } from '../Views/Auth/Login/loginController.js';
 import { dashboardController } from '../Views/Dashboard/dashboardController.js';
 import { rolesController } from '../Views/Roles/rolesController.js';
@@ -25,6 +26,12 @@ import { facturasController } from '../Views/Facturas/facturasController.js';
  * - can: permiso específico requerido para acceder
  */
 export const routes = {
+  // Página de registro de clientes
+  Register: {
+    path: "Auth/Register/index.html",
+    controlador: registerController,
+    private: false
+  },
   // Página de inicio público
   Home: {    
     path: "Home/index.html",
