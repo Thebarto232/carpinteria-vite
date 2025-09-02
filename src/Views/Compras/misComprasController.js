@@ -262,10 +262,6 @@ const renderizarCompra = (compra) => {
             </div>
 
             <div class="compra-actions">
-                <button class="btn btn-outline btn-small btn-ver-detalles" data-compra-id="${compra.id_venta}">
-                    <i data-lucide="eye" width="14" height="14"></i>
-                    Ver Detalles
-                </button>
                 ${compra.estado_venta === 'COMPLETADA' ? `
                     <button class="btn btn-secondary btn-small btn-descargar-factura" data-venta-id="${compra.id_venta}">
                         <i data-lucide="download" width="14" height="14"></i>

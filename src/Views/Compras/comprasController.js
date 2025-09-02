@@ -167,8 +167,6 @@ const renderizarItemsCarrito = () => {
         return `
             <div class="item-carrito" data-id="${item.id_carrito}">
                 <div class="item-info">
-                    <img src="${producto.imagen || '/images/no-image.png'}" 
-                         alt="${item.nombre_producto || producto.nombre_producto}" class="item-imagen">
                     <div class="item-detalles">
                         <h4>${item.nombre_producto || producto.nombre_producto}</h4>
                         <p class="item-categoria">${item.nombre_categoria || producto.nombre_categoria || 'Sin categoría'}</p>
