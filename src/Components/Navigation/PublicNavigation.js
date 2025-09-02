@@ -4,6 +4,7 @@
  */
 
 import { userManager } from '../../Helpers/userManager.js';
+import { confirm } from '../../Helpers/alertas.js';
 
 export class PublicNavigation {
     constructor() {
@@ -103,6 +104,7 @@ export class PublicNavigation {
 
         // Usuario autenticado
         const tieneDashboard = this.permisos.includes('dashboard');
+        const token = localStorage.getItem('accessToken');
         
         return `
             <div class="nav-user-section">
@@ -112,17 +114,26 @@ export class PublicNavigation {
                         Dashboard
                     </button>
                 ` : ''}
-                
-                <div class="nav-user-info">
-                    <span class="nav-user-name">
-                        <i data-lucide="user" width="14" height="14"></i>
-                        ${this.usuario.nombre_usuario || 'Usuario'}
-                    </span>
-                    <button class="nav-button nav-button-secondary" id="btnCerrarSesion">
-                        <i data-lucide="log-out" width="16" height="16"></i>
-                        Cerrar Sesión
+
+                ${token ? `
+                    <div class="nav-user-info">
+                        <span class="nav-user-name">
+                            <i data-lucide="user" width="14" height="14"></i>
+                            ${this.usuario.nombre_usuario || 'Usuario'}
+                        </span>
+                        <button class="nav-button nav-button-secondary" id="btnCerrarSesion">
+                            <i data-lucide="log-out" width="16" height="16"></i>
+                            Cerrar Sesión
+                        </button>
+                    </div>
+                    ` : `
+                    <button class="nav-button" id="btnIniciarSesion">
+                        <i data-lucide="log-in" width="16" height="16"></i>
+                        Iniciar Sesión
                     </button>
-                </div>
+                    `}
+                
+                
             </div>
         `;
     }
@@ -177,29 +188,27 @@ export class PublicNavigation {
     async cerrarSesion() {
     try {
         const confirmacion = await confirm(
-        '¿Estás seguro de que deseas cerrar sesión?',
-        'Sí, cerrar sesión',
-        'Cancelar'
+            '¿Estás seguro de que deseas cerrar sesión?',
+            'Sí, cerrar sesión',
+            'Cancelar'
         );
-        
         if (!confirmacion) return;
 
         // Llamar al endpoint de logout
         await api.post('/auth/logout', {});
-        
+
         // Limpiar localStorage
         localStorage.clear();
-        
+
         // Disparar evento de cambio de autenticación
         const eventoAuth = new CustomEvent('authStateChanged', {
-        detail: { usuario: null, autenticado: false },
-        bubbles: true
+            detail: { usuario: null, autenticado: false },
+            bubbles: true
         });
         document.dispatchEvent(eventoAuth);
-        
+
         // Redirigir al login
         location.hash = '#Login';
-        
     } catch (error) {
         console.error('Error al cerrar sesión:', error);
         localStorage.clear();
