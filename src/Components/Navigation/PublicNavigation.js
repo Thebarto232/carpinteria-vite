@@ -116,6 +116,10 @@ export class PublicNavigation {
                 ` : ''}
 
                 ${token ? `
+                    <button class="nav-button nav-button-primary" id="btnMisCompras">
+                        <i data-lucide="shopping-bag" width="16" height="16"></i>
+                        Mis Compras
+                    </button>
                     <div class="nav-user-info">
                         <span class="nav-user-name">
                             <i data-lucide="user" width="14" height="14"></i>
@@ -157,6 +161,15 @@ export class PublicNavigation {
             btnDashboard.addEventListener('click', (e) => {
                 e.preventDefault();
                 location.hash = '#Dashboard';
+            });
+        }
+
+        // Evento para ir a Mis Compras
+        const btnMisCompras = document.getElementById('btnMisCompras');
+        if (btnMisCompras) {
+            btnMisCompras.addEventListener('click', (e) => {
+                e.preventDefault();
+                location.hash = '#MisCompras';
             });
         }
 
