@@ -23,45 +23,46 @@
       </div>
     </div>
   </section>
-      <!-- Filtros -->
-      <div class="tienda-filters">
-        <div class="filters-row">
-          <div class="filter-group">
-            <label for="searchInput">Buscar productos</label>
-            <input 
-              type="text" 
-              id="searchInput" 
-              class="form-control" 
-              placeholder="Buscar por nombre o descripción..."
-            >
-          </div>
-          <div class="filter-group">
-            <label for="filtroCategoria">Categoría</label>
-            <select id="filtroCategoria" class="form-control">
-              <option value="">Todas las categorías</option>
-            </select>
-          </div>
-          <div class="filter-group">
-            <label for="filtroProveedor">Proveedor</label>
-            <select id="filtroProveedor" class="form-control">
-              <option value="">Todos los proveedores</option>
-            </select>
-          </div>
-          <div class="filter-group">
-            <label for="ordenarPor">Ordenar por</label>
-            <select id="ordenarPor" class="form-control">
-              <option value="nombre">Nombre</option>
-              <option value="precio_asc">Precio (menor a mayor)</option>
-              <option value="precio_desc">Precio (mayor a menor)</option>
-            </select>
-          </div>
+
+  <div class="tienda-content">
+    <!-- Filtros -->
+    <div class="tienda-filters">
+      <div class="filters-row">
+        <div class="filter-group">
+          <label for="searchInput">Buscar productos</label>
+          <input 
+            type="text" 
+            id="searchInput" 
+            class="form-control" 
+            placeholder="Buscar por nombre o descripción..."
+          >
+        </div>
+        <div class="filter-group">
+          <label for="filtroCategoria">Categoría</label>
+          <select id="filtroCategoria" class="form-control">
+            <option value="">Todas las categorías</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="filtroProveedor">Proveedor</label>
+          <select id="filtroProveedor" class="form-control">
+            <option value="">Todos los proveedores</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="ordenarPor">Ordenar por</label>
+          <select id="ordenarPor" class="form-control">
+            <option value="nombre">Nombre</option>
+            <option value="precio_asc">Precio (menor a mayor)</option>
+            <option value="precio_desc">Precio (mayor a menor)</option>
+          </select>
         </div>
       </div>
+    </div>
 
-      <!-- Grid de productos -->
-      <div id="productosGrid" class="productos-grid">
-        <!-- Los productos se cargarán aquí dinámicamente -->
-      </div>
+    <!-- Grid de productos -->
+    <div id="productosGrid" class="productos-grid">
+      <!-- Los productos se cargarán aquí dinámicamente -->
     </div>
   </div>
 
