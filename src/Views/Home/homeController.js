@@ -4,6 +4,7 @@
  */
 import './home.css';
 import { PublicNavigation } from '../../Components/Navigation/PublicNavigation.js';
+import { userManager } from '../../Helpers/userManager.js';
 
 /**
  * Función principal del controlador de Home
@@ -93,8 +94,13 @@ const configurarEventos = () => {
   if (getStartedBtn) {
     getStartedBtn.addEventListener('click', () => {
       const token = localStorage.getItem('accessToken');
+      
       if (token) {
-        location.hash = '#Dashboard';
+        if (userManager.tienePermiso('dashboard') || userManager.tienePermiso('*')) {
+          location.hash = '#Dashboard';
+        } else {
+          location.hash = '#Tienda';
+        }
       } else {
         location.hash = '#Login';
       }
