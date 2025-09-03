@@ -89,7 +89,7 @@ const configurarEventos = () => {
 
         if (e.target.classList.contains('btn-eliminar')) {
             const itemId = parseInt(e.target.dataset.itemId);
-            eliminarItem(itemId);
+            eliminarDelCarrito(itemId);
         }
     });
 };
@@ -198,6 +198,25 @@ const renderizarItemsCarrito = () => {
 };
 
 /**
+ * Elimina un producto del carrito
+ */
+const eliminarDelCarrito = async (idProducto) => {
+    try {
+        const response = await api.del(`/carrito/producto/${idProducto}`);
+        
+        if (response.success) {
+            await cargarDatosCarrito();
+        } else {
+            await error('Error al eliminar producto del carrito');
+        }
+        
+    } catch (err) {
+        console.error('Error eliminando del carrito:', err);
+        await error('Error al eliminar producto del carrito');
+    }
+};
+
+/**
  * Calcula y actualiza los totales
  */
 const calcularTotales = () => {
@@ -248,28 +267,7 @@ const modificarCantidad = async (itemId, accion) => {
 /**
  * Elimina un item del carrito
  */
-const eliminarItem = async (itemId) => {
-    try {
-        const confirmar = await confirm(
-            '¿Estás seguro de que quieres eliminar este producto del carrito?',
-            'Sí, eliminar',
-            'Cancelar'
-        );
-        if (!confirmar) return;
-
-        const response = await api.del(`/carrito/producto/${itemId}`);
-        if (response.success) {
-            await cargarDatosCarrito();
-            await success('Producto eliminado del carrito');
-            // Si tienes función para actualizar contador, llámala aquí
-        } else {
-            await error('Error al eliminar producto del carrito');
-        }
-    } catch (err) {
-        console.error('Error eliminando item:', err);
-        await error('Error al eliminar el producto');
-    }
-};
+// Eliminar producto del carrito ahora usa la función de tiendaController
 
 /**
  * Vacía completamente el carrito
