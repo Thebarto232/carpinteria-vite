@@ -64,6 +64,21 @@
     <div id="productosGrid" class="productos-grid">
       <!-- Los productos se cargarán aquí dinámicamente -->
     </div>
+
+    <!-- Modal de detalles de producto -->
+    <div id="modalProductoTienda" class="modal">
+      <div class="modal-content modal-producto-detalle">
+        <div class="modal-header">
+          <h3 id="modalProductoTitulo"></h3>
+          <button id="cerrarModalProductoTienda" class="close" type="button">
+            <i data-lucide="x" width="20" height="20"></i>
+          </button>
+        </div>
+        <div class="producto-modal-body" id="modalProductoBody">
+          <!-- Aquí se cargan los detalles del producto -->
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- Modal del Carrito -->

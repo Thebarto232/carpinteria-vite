@@ -302,15 +302,24 @@ const mostrarProductos = (productos) => {
                         </span>
                     </div>
                     <div class="producto-footer">
-                        <span class="producto-precio">$${parseFloat(producto.precio).toLocaleString()}</span>
-                        <button 
-                            class="btn-agregar-carrito" 
-                            onclick="agregarAlCarrito(${producto.id_producto})"
-                            ${producto.stock <= 0 ? 'disabled' : ''}
-                        >
-                            <i data-lucide="plus" width="16" height="16"></i>
-                            ${producto.stock <= 0 ? 'Agotado' : 'Agregar'}
-                        </button>
+                        <div class="producto-precio">$${parseFloat(producto.precio).toLocaleString()}</div>
+                        <div class="producto-footer-botones">
+                            <button 
+                                class="btn-agregar-carrito" 
+                                onclick="agregarAlCarrito(${producto.id_producto})"
+                                ${producto.stock <= 0 ? 'disabled' : ''}
+                            >
+                                <i data-lucide="plus" width="16" height="16"></i>
+                                ${producto.stock <= 0 ? 'Agotado' : 'Agregar'}
+                            </button>
+                            <button 
+                                class="btn btn-secondary btn-ver-detalle" 
+                                data-id="${producto.id_producto}"
+                            >
+                                <i data-lucide="eye" width="16" height="16"></i>
+                                Ver detalles
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -336,8 +345,253 @@ const mostrarProductos = (productos) => {
                 img.src = producto.imagenes[actual];
             });
         }
+        // Cargar reseñas y formulario
+        cargarResenasProducto(producto.id_producto);
     });
-};
+
+    // Evento para abrir modal de detalles
+    document.querySelectorAll('.btn-ver-detalle').forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+            const id = btn.getAttribute('data-id');
+            await abrirModalProductoTienda(id);
+        });
+    });
+
+}
+
+/**
+ * Abre el modal de detalles de producto en la tienda
+ */
+async function abrirModalProductoTienda(idProducto) {
+    // Buscar el producto en la lista global
+    const producto = productosDisponibles.find(p => p.id_producto == idProducto);
+    if (!producto) return;
+    // Cargar reseñas
+    let reseñas = [];
+    try {
+        const resp = await api.get(`/productos/${idProducto}/resenas`);
+        if (resp.success && Array.isArray(resp.data)) {
+            reseñas = resp.data;
+        }
+    } catch {}
+    // Renderizar contenido
+    const body = document.getElementById('modalProductoBody');
+    const titulo = document.getElementById('modalProductoTitulo');
+    if (!body || !titulo) return;
+    titulo.textContent = producto.nombre_producto;
+    body.innerHTML = `
+        <div class="modal-producto-main">
+            <div class="modal-producto-imagenes">
+                ${(producto.imagenes && producto.imagenes.length > 0) ? `
+                    <div class="modal-carrusel" style="position:relative;">
+                        <button class="carrusel-flecha carrusel-flecha-izq" style="position:absolute;left:0;top:50%;transform:translateY(-50%);z-index:2;" type="button"><i data-lucide="chevron-left" width="28" height="28"></i></button>
+                        <img src="${producto.imagenes[0]}" class="modal-producto-img" id="modalProductoImg" />
+                        <button class="carrusel-flecha carrusel-flecha-der" style="position:absolute;right:0;top:50%;transform:translateY(-50%);z-index:2;" type="button"><i data-lucide="chevron-right" width="28" height="28"></i></button>
+                    </div>
+                ` : '<div class="empty-state">Sin imágenes</div>'}
+            </div>
+            <div class="modal-producto-info">
+                <div class="modal-producto-info-row">
+                    <div class="modal-info-block">
+                        <span class="modal-info-key"><i data-lucide="layers" width="18" height="18"></i> Categoría</span>
+                        <span class="modal-info-value">${producto.nombre_categoria || 'Sin categoría'}</span>
+                    </div>
+                    <div class="modal-info-block">
+                        <span class="modal-info-key"><i data-lucide="truck" width="18" height="18"></i> Proveedor</span>
+                        <span class="modal-info-value">${producto.nombre_proveedor || 'Sin proveedor'}</span>
+                    </div>
+                </div>
+                <div class="modal-producto-info-row">
+                    <div class="modal-info-block">
+                        <span class="modal-info-key"><i data-lucide="dollar-sign" width="18" height="18"></i> Precio</span>
+                        <span class="modal-info-value">$${parseFloat(producto.precio).toLocaleString()}</span>
+                    </div>
+                    <div class="modal-info-block">
+                        <span class="modal-info-key"><i data-lucide="package" width="18" height="18"></i> Stock</span>
+                        <span class="modal-info-value">${producto.stock}</span>
+                    </div>
+                </div>
+                <div class="modal-producto-descripcion">
+                    <span class="modal-info-key"><i data-lucide="file-text" width="18" height="18"></i> Descripción</span>
+                    <div class="modal-info-value modal-descripcion-text">${producto.descripcion || 'Sin descripción'}</div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-producto-reseñas">
+            <h4>Reseñas</h4>
+            <div class="reseña-form-container"></div>
+            <div class="reseñas-list">
+                ${reseñas.length > 0 ? reseñas.map(r => `
+                    <div class="reseña-item">
+                        <div class="reseña-header">
+                            <span class="reseña-usuario"><i data-lucide="user" width="14" height="14"></i> ${r.nombre_usuario}</span>
+                            <span class="reseña-calificacion">${'<i data-lucide="star" style="color:#f59e42"></i>'.repeat(r.calificacion)}${'<i data-lucide="star" style="color:#e5e7eb"></i>'.repeat(5 - r.calificacion)}</span>
+                            <span class="reseña-fecha">${new Date(r.fecha_reseña).toLocaleDateString()}</span>
+                        </div>
+                        <div class="reseña-comentario">${r.comentario || ''}</div>
+                    </div>
+                `).join('') : '<div class="empty-state">Sin reseñas aún</div>'}
+            </div>
+        </div>
+        <div class="modal-producto-footer">
+            <button class="btn btn-primary" id="btnAgregarModalCarrito">
+                <i data-lucide="shopping-cart" width="18" height="18"></i> Agregar al carrito
+            </button>
+        </div>
+    `;
+    lucide.createIcons();
+    // Botón agregar al carrito en el modal
+    const btnAgregar = body.querySelector('#btnAgregarModalCarrito');
+    if (btnAgregar) {
+        btnAgregar.onclick = () => {
+            agregarAlCarrito(idProducto);
+            document.getElementById('modalProductoTienda').classList.remove('show');
+        };
+    }
+    // Carrusel de imágenes en el modal
+    if (producto.imagenes && producto.imagenes.length > 1) {
+        let actual = 0;
+        const img = document.getElementById('modalProductoImg');
+        const btnPrev = body.querySelector('.carrusel-flecha-izq');
+        const btnNext = body.querySelector('.carrusel-flecha-der');
+        btnPrev.addEventListener('click', () => {
+            actual = (actual - 1 + producto.imagenes.length) % producto.imagenes.length;
+            img.src = producto.imagenes[actual];
+        });
+        btnNext.addEventListener('click', () => {
+            actual = (actual + 1) % producto.imagenes.length;
+            img.src = producto.imagenes[actual];
+        });
+    }
+    // Formulario de reseña si está autenticado
+    const usuario = userManager.obtenerUsuario();
+    const formContainer = body.querySelector('.reseña-form-container');
+    if (usuario && formContainer) {
+        formContainer.innerHTML = `
+            <form class="reseña-form" onsubmit="return false;">
+                <textarea id="comentario-modal" class="form-control" rows="2" maxlength="300" placeholder="Escribe tu reseña..."></textarea>
+                <div class="reseña-form-bottom">
+                    <div class="reseña-estrellas" id="reseñaEstrellas">
+                        ${[1,2,3,4,5].map(i => `<i data-lucide="star" width="28" height="28" class="estrella-form" data-value="${i}" style="cursor:pointer;color:#e5e7eb;"></i>`).join('')}
+                    </div>
+                    <button type="submit" class="btn btn-success" id="btnEnviarResenaModal">
+                        <i data-lucide="star" width="16" height="16"></i> Enviar reseña
+                    </button>
+                </div>
+            </form>
+        `;
+        lucide.createIcons();
+        // Interactividad de estrellas
+        let calificacion = 0;
+        const estrellas = formContainer.querySelectorAll('.estrella-form');
+        estrellas.forEach((estrella, idx) => {
+            estrella.addEventListener('click', () => {
+                calificacion = idx + 1;
+                estrellas.forEach((e, i) => {
+                    e.style.color = i < calificacion ? '#f59e42' : '#e5e7eb';
+                });
+            });
+        });
+        document.getElementById('btnEnviarResenaModal').onclick = async (e) => {
+            e.preventDefault();
+            const comentario = document.getElementById('comentario-modal').value;
+            if (!calificacion) return error('Selecciona una calificación');
+            try {
+                const resp = await api.post(`/productos/${idProducto}/resenas`, { calificacion, comentario });
+                if (resp.success) {
+                    success('¡Reseña enviada!');
+                    abrirModalProductoTienda(idProducto);
+                } else {
+                    error(resp.error || 'No se pudo enviar la reseña');
+                }
+            } catch (err) {
+                error('Error al enviar la reseña');
+            }
+        };
+    } else if (formContainer) {
+        formContainer.innerHTML = '<div class="empty-state">Inicia sesión para dejar una reseña</div>';
+    }
+    // Mostrar modal
+    document.getElementById('modalProductoTienda').classList.add('show');
+    // Evento cerrar
+    document.getElementById('cerrarModalProductoTienda').onclick = () => {
+        document.getElementById('modalProductoTienda').classList.remove('show');
+    };
+}
+
+/**
+ * Cargar reseñas y mostrar formulario para un producto
+ */
+async function cargarResenasProducto(idProducto) {
+    const reseñasDiv = document.getElementById(`reseñas-${idProducto}`);
+    if (!reseñasDiv) return;
+    // Obtener reseñas
+    let reseñas = [];
+    try {
+        const resp = await api.get(`/productos/${idProducto}/resenas`);
+        if (resp.success && Array.isArray(resp.data)) {
+            reseñas = resp.data;
+        }
+    } catch (err) {
+        reseñasDiv.querySelector('.reseñas-list').innerHTML = '<div class="error-state">No se pudieron cargar las reseñas</div>';
+        return;
+    }
+    // Mostrar reseñas
+    reseñasDiv.querySelector('.reseñas-list').innerHTML = reseñas.length > 0 ? reseñas.map(r => `
+        <div class="reseña-item">
+            <div class="reseña-header">
+                <span class="reseña-usuario"><i data-lucide="user" width="14" height="14"></i> ${r.nombre_usuario}</span>
+                <span class="reseña-calificacion">${'★'.repeat(r.calificacion)}${'☆'.repeat(5 - r.calificacion)}</span>
+                <span class="reseña-fecha">${new Date(r.fecha_reseña).toLocaleDateString()}</span>
+            </div>
+            <div class="reseña-comentario">${r.comentario || ''}</div>
+        </div>
+    `).join('') : '<div class="empty-state">Sin reseñas aún</div>';
+    lucide.createIcons();
+    // Mostrar formulario si está autenticado
+    const usuario = userManager.obtenerUsuario();
+    if (usuario) {
+        reseñasDiv.querySelector('.reseña-form-container').innerHTML = `
+            <form class="reseña-form" onsubmit="return false;">
+                <label for="calificacion-${idProducto}">Calificación:</label>
+                <select id="calificacion-${idProducto}" class="form-control" required>
+                    <option value="">Selecciona</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+                <label for="comentario-${idProducto}">Comentario:</label>
+                <textarea id="comentario-${idProducto}" class="form-control" rows="2" maxlength="300" placeholder="Escribe tu reseña..."></textarea>
+                <button type="submit" class="btn btn-success" id="btnEnviarResena-${idProducto}">
+                    <i data-lucide="star" width="16" height="16"></i> Enviar reseña
+                </button>
+            </form>
+        `;
+        lucide.createIcons();
+        // Evento submit
+        document.getElementById(`btnEnviarResena-${idProducto}`).onclick = async (e) => {
+            e.preventDefault();
+            const calificacion = parseInt(document.getElementById(`calificacion-${idProducto}`).value);
+            const comentario = document.getElementById(`comentario-${idProducto}`).value;
+            if (!calificacion) return error('Selecciona una calificación');
+            try {
+                const resp = await api.post(`/productos/${idProducto}/resenas`, { calificacion, comentario });
+                if (resp.success) {
+                    success('¡Reseña enviada!');
+                    cargarResenasProducto(idProducto);
+                } else {
+                    error(resp.error || 'No se pudo enviar la reseña');
+                }
+            } catch (err) {
+                error('Error al enviar la reseña');
+            }
+        };
+    } else {
+        reseñasDiv.querySelector('.reseña-form-container').innerHTML = '<div class="empty-state">Inicia sesión para dejar una reseña</div>';
+    }
+}
 
 /**
  * Filtra los productos según los criterios seleccionados
