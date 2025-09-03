@@ -41,6 +41,15 @@ const inicializarPagina = async () => {
         const navigation = new DashboardNavigation();
         await navigation.init();
         
+        // Limitar opciones de filtro de estado a solo 'GENERADA' y 'PAGADA'
+        const filtroEstado = document.getElementById('filtroEstado');
+            if (filtroEstado) {
+                filtroEstado.innerHTML = `
+                    <option value="">Todos los estados</option>
+                    <option value="GENERADA">Emitida</option>
+                    <option value="PAGADA">Pagada</option>
+                `;
+            }
         // Configurar eventos
         configurarEventos();
         
@@ -175,7 +184,7 @@ const mostrarTablaFacturas = (facturas) => {
             </thead>
             <tbody>
                 ${facturas.map(factura => `
-                    <tr data-factura-id="${factura.id_factura}">
+                    <tr data-factura-id="${factura.id_factura}" data-estado="${factura.estado_factura === 'EMITIDA' ? 'GENERADA' : factura.estado_factura}" data-fecha="${factura.fecha_factura}">
                         <td>${factura.id_factura}</td>
                         <td><strong>#${factura.numero_factura}</strong></td>
                         <td>
@@ -264,38 +273,40 @@ const getBadgeEstado = (estado) => {
  */
 const filtrarFacturas = () => {
     const searchTerm = document.getElementById('searchInput')?.value.toLowerCase() || '';
-    const filtroEstado = document.getElementById('filtroEstado')?.value || '';
+        const filtroEstado = document.getElementById('filtroEstado')?.value || '';
+    // Solo permitir filtrar por GENERADA o PAGADA
+    const estadosPermitidos = ['', 'GENERADA', 'PAGADA'];
+    if (!estadosPermitidos.includes(filtroEstado)) return;
     const filtroFecha = document.getElementById('filtroFecha')?.value || '';
-    
-    let facturasFiltradas = [...facturas];
-    
-    // Filtro por texto
-    if (searchTerm) {
-        facturasFiltradas = facturasFiltradas.filter(factura => 
-            factura.numero_factura.toLowerCase().includes(searchTerm) ||
-            (factura.cliente_nombre && factura.cliente_nombre.toLowerCase().includes(searchTerm))
-        );
-    }
-    
-    // Filtro por estado
-    if (filtroEstado) {
-        facturasFiltradas = facturasFiltradas.filter(factura => 
-            factura.estado_factura === filtroEstado
-        );
-    }
-    
-    // Filtro por fecha (últimos 30 días, 90 días, etc.)
-    if (filtroFecha) {
-        const ahora = new Date();
-        const dias = parseInt(filtroFecha);
-        const fechaLimite = new Date(ahora.getTime() - (dias * 24 * 60 * 60 * 1000));
-        
-        facturasFiltradas = facturasFiltradas.filter(factura => 
-            new Date(factura.fecha_factura) >= fechaLimite
-        );
-    }
-    
-    mostrarTablaFacturas(facturasFiltradas);
+
+    // Filtrar directamente sobre las filas de la tabla
+    const filas = document.querySelectorAll('.facturas-table tbody tr');
+    filas.forEach(fila => {
+        const numeroFactura = fila.querySelector('td:nth-child(2)')?.textContent.replace('#','').toLowerCase() || '';
+        const cliente = fila.querySelector('td:nth-child(3)')?.textContent.toLowerCase() || '';
+        const estado = (fila.getAttribute('data-estado') || '').toUpperCase();
+        const fecha = fila.getAttribute('data-fecha');
+
+        // Filtro por texto
+        const coincideTexto = numeroFactura.includes(searchTerm) || cliente.includes(searchTerm);
+
+        // Filtro por estado
+        let coincideEstado = true;
+        if (filtroEstado) {
+            coincideEstado = estado === filtroEstado;
+        }
+
+        // Filtro por fecha
+        let coincideFecha = true;
+        if (filtroFecha) {
+            const ahora = new Date();
+            const dias = parseInt(filtroFecha);
+            const fechaLimite = new Date(ahora.getTime() - (dias * 24 * 60 * 60 * 1000));
+            coincideFecha = new Date(fecha) >= fechaLimite;
+        }
+
+        fila.style.display = (coincideTexto && coincideEstado && coincideFecha) ? '' : 'none';
+    });
 };
 
 /**
