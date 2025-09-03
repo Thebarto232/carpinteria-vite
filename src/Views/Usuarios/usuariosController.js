@@ -1,4 +1,66 @@
 /**
+ * Lógica para selects dependientes de país, departamento y ciudad en el formulario de usuario
+ */
+function cargarDepartamentosCiudadesUsuario() {
+    const departamentosCiudades = {
+        "Amazonas": ["Leticia", "Puerto Nariño"],
+        "Antioquia": ["Medellín", "Envigado", "Bello", "Itagüí", "Rionegro"],
+        "Atlántico": ["Barranquilla", "Soledad", "Malambo"],
+        "Bolívar": ["Cartagena", "Magangué", "Turbaco"],
+        "Boyacá": ["Tunja", "Duitama", "Sogamoso"],
+        "Caldas": ["Manizales", "Villamaría", "La Dorada"],
+        "Caquetá": ["Florencia"],
+        "Cauca": ["Popayán", "Santander de Quilichao"],
+        "Cesar": ["Valledupar", "Aguachica"],
+        "Córdoba": ["Montería", "Lorica"],
+        "Cundinamarca": ["Soacha", "Zipaquirá", "Girardot"],
+        "Chocó": ["Quibdó"],
+        "Huila": ["Neiva", "Pitalito"],
+        "La Guajira": ["Riohacha", "Maicao"],
+        "Magdalena": ["Santa Marta", "Ciénaga"],
+        "Meta": ["Villavicencio", "Acacías"],
+        "Nariño": ["Pasto", "Ipiales"],
+        "Norte de Santander": ["Cúcuta", "Ocaña"],
+        "Quindío": ["Armenia", "Calarcá"],
+        "Risaralda": ["Pereira", "Dosquebradas"],
+        "Santander": ["Bucaramanga", "Floridablanca", "Girón", "Piedecuesta"],
+        "Sucre": ["Sincelejo"],
+        "Tolima": ["Ibagué", "Espinal"],
+        "Valle del Cauca": ["Cali", "Palmira", "Buenaventura", "Tuluá"],
+        "Vaupés": ["Mitú"],
+        "Vichada": ["Puerto Carreño"]
+    };
+    const departamentoSelect = document.getElementById('departamento');
+    const ciudadSelect = document.getElementById('ciudad');
+    const paisSelect = document.getElementById('pais');
+    function llenarDepartamentos() {
+        departamentoSelect.innerHTML = '<option value="">Selecciona departamento</option>';
+        ciudadSelect.innerHTML = '<option value="">Selecciona ciudad</option>';
+        if (paisSelect.value === 'Colombia') {
+            Object.keys(departamentosCiudades).forEach(dep => {
+                const opt = document.createElement('option');
+                opt.value = dep;
+                opt.textContent = dep;
+                departamentoSelect.appendChild(opt);
+            });
+        }
+    }
+    if (paisSelect) paisSelect.addEventListener('change', llenarDepartamentos);
+    if (departamentoSelect) departamentoSelect.addEventListener('change', function() {
+        const dep = departamentoSelect.value;
+        ciudadSelect.innerHTML = '<option value="">Selecciona ciudad</option>';
+        if (dep && departamentosCiudades[dep]) {
+            departamentosCiudades[dep].forEach(ciudad => {
+                const opt = document.createElement('option');
+                opt.value = ciudad;
+                opt.textContent = ciudad;
+                ciudadSelect.appendChild(opt);
+            });
+        }
+    });
+    if (paisSelect) llenarDepartamentos();
+}
+/**
  * Controlador para la gestión de usuarios
  * Maneja el CRUD completo de usuarios con validación de permisos
  */
@@ -15,6 +77,9 @@ import { DashboardNavigation } from "../../Components/Navigation/DashboardNaviga
 export const usuariosController = async () => {
     // Inicializar gestor de usuario
     userManager.init();
+
+    // Inicializar selects de dirección tipo registro
+    cargarDepartamentosCiudadesUsuario();
 
     // Inicializar la página
     await inicializarPagina();
@@ -63,6 +128,7 @@ const configurarEventos = () => {
     // Búsqueda en tiempo real
     document.getElementById('searchInput')?.addEventListener('input', filtrarUsuarios);
     document.getElementById('filtroRol')?.addEventListener('change', filtrarUsuarios);
+    document.getElementById('filtroEstado')?.addEventListener('change', filtrarUsuarios);
     
     // Modal eventos
     document.getElementById('closeModal')?.addEventListener('click', cerrarModal);
@@ -111,6 +177,7 @@ const cargarUsuarios = async () => {
         if (response.success) {
             // El backend devuelve {usuarios: [...], paginacion: {...}}
             const usuarios = response.data.usuarios || response.data;
+            console.log(usuarios);
             mostrarTablaUsuarios(usuarios);
         } else {
             throw new Error(response.message || 'Error al cargar usuarios');
@@ -225,7 +292,7 @@ const mostrarTablaUsuarios = (usuarios) => {
             </thead>
             <tbody>
                 ${usuarios.map(usuario => `
-                    <tr data-usuario-id="${usuario.id_usuario}">
+                    <tr data-usuario-id="${usuario.id_usuario}" data-estado="${usuario.estado}">
                         <td>${usuario.id_usuario}</td>
                         <td>
                             <div>
@@ -317,24 +384,32 @@ const actualizarFiltroRolesDeUsuarios = (usuarios) => {
 const filtrarUsuarios = () => {
     const searchTerm = document.getElementById('searchInput')?.value.toLowerCase() || '';
     const rolFiltro = document.getElementById('filtroRol')?.value || '';
+    const estadoFiltro = document.getElementById('filtroEstado')?.value.toUpperCase() || '';
     const filas = document.querySelectorAll('.usuarios-table tbody tr');
-    
+
     filas.forEach(fila => {
         const nombre = fila.querySelector('td:nth-child(2)')?.textContent.toLowerCase() || '';
         const email = fila.querySelector('td:nth-child(3)')?.textContent.toLowerCase() || '';
         const rol = fila.querySelector('td:nth-child(5)')?.textContent.toLowerCase() || '';
-        
+        const estado = (fila.getAttribute('data-estado') || '').toUpperCase();
+
         // Filtro por texto
         const coincideTexto = nombre.includes(searchTerm) || email.includes(searchTerm) || rol.includes(searchTerm);
-        
+
         // Filtro por rol
         let coincideRol = true;
         if (rolFiltro) {
             const usuario = window.usuariosData?.find(u => u.id_usuario == fila.dataset.usuarioId);
             coincideRol = usuario && (usuario.rol === rolFiltro);
         }
-        
-        fila.style.display = (coincideTexto && coincideRol) ? '' : 'none';
+
+        // Filtro por estado
+        let coincideEstado = true;
+        if (estadoFiltro) {
+            coincideEstado = estado === estadoFiltro;
+        }
+
+        fila.style.display = (coincideTexto && coincideRol && coincideEstado) ? '' : 'none';
     });
 };
 
@@ -461,6 +536,8 @@ const verDetallesUsuario = async (idUsuario) => {
         if (typeof lucide !== 'undefined') {
             lucide.createIcons();
         }
+
+        console.log(usuario);
         
     } catch (err) {
         console.error('Error cargando usuario:', err);
@@ -493,6 +570,28 @@ const llenarFormulario = (usuario) => {
     document.getElementById('telefono').value = usuario.telefono || '';
     document.getElementById('rolUsuario').value = usuario.rol || '';
     document.getElementById('activo').checked = usuario.estado === 'ACTIVO';
+    document.getElementById('direccion').value = usuario.direccion || '';
+    document.getElementById('codigo_postal').value = usuario.codigo_postal || '';
+
+    // Autocompletar selects dependientes
+    const paisSelect = document.getElementById('pais');
+    const departamentoSelect = document.getElementById('departamento');
+    const ciudadSelect = document.getElementById('ciudad');
+    if (paisSelect) {
+        paisSelect.value = usuario.pais || '';
+        paisSelect.dispatchEvent(new Event('change'));
+    }
+    if (departamentoSelect) {
+        // Esperar a que se llenen los departamentos
+        setTimeout(() => {
+            departamentoSelect.value = usuario.departamento || '';
+            departamentoSelect.dispatchEvent(new Event('change'));
+            // Esperar a que se llenen las ciudades
+            setTimeout(() => {
+                ciudadSelect.value = usuario.ciudad || '';
+            }, 50);
+        }, 50);
+    }
 };
 
 /**
@@ -550,7 +649,12 @@ const manejarSubmitFormulario = async (e) => {
             correo: formData.get('email').trim(),
             telefono: formData.get('telefono')?.trim() || null,
             rol: formData.get('rol_id'),
-            estado: formData.get('activo') === 'on' ? 'ACTIVO' : 'INACTIVO'
+            estado: document.getElementById('activo').checked ? 'ACTIVO' : 'INACTIVO',
+            direccion: formData.get('direccion')?.trim() || null,
+            ciudad: formData.get('ciudad')?.trim() || null,
+            departamento: formData.get('departamento')?.trim() || null,
+            codigo_postal: formData.get('codigo_postal')?.trim() || null,
+            pais: formData.get('pais')?.trim() || null
         };
         
         // Agregar contraseña solo si es creación
@@ -569,11 +673,20 @@ const manejarSubmitFormulario = async (e) => {
         }
         
         let response;
-        
+
         if (window.usuarioEditando && window.usuarioEditando !== 'view') {
             // Actualizar usuario existente
             delete datos.contraseña; // No enviar contraseña en edición
-            response = await api.put(`/usuarios/${window.usuarioEditando}`, datos);
+            // Actualizar datos generales
+            const datosSinEstado = { ...datos };
+            delete datosSinEstado.estado;
+            response = await api.put(`/usuarios/${window.usuarioEditando}`, datosSinEstado);
+
+            // Actualizar estado usando endpoint específico
+            const estadoResponse = await api.patch(`/usuarios/${window.usuarioEditando}/estado`, { estado: datos.estado });
+            if (!estadoResponse.success) {
+                throw new Error(estadoResponse.message || 'Error al actualizar el estado del usuario');
+            }
         } else {
             // Crear nuevo usuario
             response = await api.post('/usuarios', datos);

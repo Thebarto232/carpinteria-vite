@@ -98,6 +98,95 @@
         </div>
       </div>
 
+        <!-- Campo País -->
+        <div class="form-group">
+          <label for="pais" class="form-label">
+            <i data-lucide="globe" width="16" height="16"></i>
+            País
+          </label>
+          <div class="input-container">
+            <i data-lucide="globe" width="18" height="18" class="input-icon"></i>
+            <select id="pais" name="pais" class="form-input">
+              <option value="">Selecciona país</option>
+              <option value="Colombia">Colombia</option>
+              <!-- Puedes agregar más países si lo necesitas -->
+            </select>
+          </div>
+          <div class="error-message" id="paisError"></div>
+        </div>
+
+        <!-- Campo Departamento -->
+        <div class="form-group">
+          <label for="departamento" class="form-label">
+            <i data-lucide="landmark" width="16" height="16"></i>
+            Departamento
+          </label>
+          <div class="input-container">
+            <i data-lucide="landmark" width="18" height="18" class="input-icon"></i>
+            <select id="departamento" name="departamento" class="form-input">
+              <option value="">Selecciona departamento</option>
+              <!-- Departamentos de Colombia se llenan por JS -->
+            </select>
+          </div>
+          <div class="error-message" id="departamentoError"></div>
+        </div>
+
+        <!-- Campo Ciudad -->
+        <div class="form-group">
+          <label for="ciudad" class="form-label">
+            <i data-lucide="building" width="16" height="16"></i>
+            Ciudad
+          </label>
+          <div class="input-container">
+            <i data-lucide="building" width="18" height="18" class="input-icon"></i>
+            <select id="ciudad" name="ciudad" class="form-input">
+              <option value="">Selecciona ciudad</option>
+              <!-- Ciudades se llenan por JS según departamento -->
+            </select>
+          </div>
+          <div class="error-message" id="ciudadError"></div>
+        </div>
+
+        <!-- Campo Dirección -->
+        <div class="form-group">
+          <label for="direccion" class="form-label">
+            <i data-lucide="map-pin" width="16" height="16"></i>
+            Dirección
+          </label>
+          <div class="input-container">
+            <i data-lucide="map-pin" width="18" height="18" class="input-icon"></i>
+            <input 
+              type="text" 
+              id="direccion" 
+              name="direccion" 
+              class="form-input"
+              placeholder="Calle, número, barrio"
+              maxlength="255"
+            >
+          </div>
+          <div class="error-message" id="direccionError"></div>
+        </div>
+
+        <!-- Campo Código Postal -->
+        <div class="form-group">
+          <label for="codigo_postal" class="form-label">
+            <i data-lucide="mail" width="16" height="16"></i>
+            Código Postal
+          </label>
+          <div class="input-container">
+            <i data-lucide="mail" width="18" height="18" class="input-icon"></i>
+            <input 
+              type="text" 
+              id="codigo_postal" 
+              name="codigo_postal" 
+              class="form-input"
+              placeholder="Ejemplo: 680001"
+              maxlength="20"
+            >
+          </div>
+          <div class="error-message" id="codigoPostalError"></div>
+        </div>
+
       <!-- Botón de Registro -->
       <button type="submit" class="register-button" id="btnRegister">
         <span class="button-content" id="btnText">

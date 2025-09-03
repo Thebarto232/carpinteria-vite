@@ -38,6 +38,11 @@
         <select id="filtroRol" class="form-control" style="max-width: 200px;">
           <option value="">Todos los roles</option>
         </select>
+        <select id="filtroEstado" class="form-control" style="max-width: 150px; margin-left: 1rem;">
+          <option value="">Todos los estados</option>
+          <option value="ACTIVO">Activo</option>
+          <option value="INACTIVO">Inactivo</option>
+        </select>
         <button id="btnRefresh" class="btn btn-secondary">
           <i data-lucide="refresh-cw" width="16" height="16"></i>
           Actualizar
@@ -155,6 +160,45 @@
               <input type="checkbox" id="activo" name="activo" checked>
               <span>Usuario Activo</span>
             </label>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="pais">País</label>
+              <select id="pais" name="pais" class="form-control">
+                <option value="">Selecciona país</option>
+                <option value="Colombia">Colombia</option>
+                <!-- Puedes agregar más países si lo necesitas -->
+              </select>
+              <div class="error-message" id="errorPais"></div>
+            </div>
+            <div class="form-group">
+              <label for="departamento">Departamento</label>
+              <select id="departamento" name="departamento" class="form-control">
+                <option value="">Selecciona departamento</option>
+                <!-- Departamentos de Colombia se llenan por JS -->
+              </select>
+              <div class="error-message" id="errorDepartamento"></div>
+            </div>
+            <div class="form-group">
+              <label for="ciudad">Ciudad</label>
+              <select id="ciudad" name="ciudad" class="form-control">
+                <option value="">Selecciona ciudad</option>
+                <!-- Ciudades se llenan por JS según departamento -->
+              </select>
+              <div class="error-message" id="errorCiudad"></div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="direccion">Dirección</label>
+              <input type="text" id="direccion" name="direccion" class="form-control" placeholder="Calle, número, barrio" maxlength="255">
+              <div class="error-message" id="errorDireccion"></div>
+            </div>
+            <div class="form-group">
+              <label for="codigo_postal">Código Postal</label>
+              <input type="text" id="codigo_postal" name="codigo_postal" class="form-control" placeholder="Ejemplo: 680001" maxlength="20">
+              <div class="error-message" id="errorCodigoPostal"></div>
+            </div>
           </div>
         </form>
       </div>

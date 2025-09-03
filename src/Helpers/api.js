@@ -177,6 +177,28 @@ export const put = async (endpoint, data) => {
 };
 
 /**
+ * Realiza una petición PATCH a la API
+ * @param {string} endpoint - Endpoint de la API (sin /api)
+ * @param {Object} data - Datos a enviar en el body
+ * @returns {Promise<Object>} Respuesta de la API
+ */
+export const patch = async (endpoint, data) => {
+  try {
+    const opciones = {
+      method: 'PATCH',
+      headers: getHeaders(),
+      body: JSON.stringify(data)
+    };
+
+    const respuesta = await fetch(`${API_URL}${endpoint}`, opciones);
+    return await manejarRespuesta(respuesta, endpoint, opciones);
+  } catch (error) {
+    console.error('Error en petición PATCH:', error);
+    return { success: false, message: 'Error de conexión' };
+  }
+};
+
+/**
  * Realiza una petición DELETE a la API
  * @param {string} endpoint - Endpoint de la API (sin /api)
  * @returns {Promise<Object>} Respuesta de la API
