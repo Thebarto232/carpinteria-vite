@@ -162,10 +162,11 @@ const renderizarItemsCarrito = () => {
         if (!producto) return '';
 
         const precio = parseFloat(item.precio || producto.precio);
-        const subtotal = parseFloat(item.subtotal || (precio * item.cantidad));
+        // El subtotal viene del backend
+        const subtotal = parseFloat(item.subtotal);
 
         return `
-            <div class="item-carrito" data-id="${item.id_carrito}">
+            <div class="item-carrito" data-id="${item.id_producto}">
                 <div class="item-info">
                     <div class="item-detalles">
                         <h4>${item.nombre_producto || producto.nombre_producto}</h4>
@@ -173,18 +174,17 @@ const renderizarItemsCarrito = () => {
                         <div class="item-precio">$${precio.toFixed(2)} c/u</div>
                     </div>
                 </div>
-                
                 <div class="item-cantidad">
-                    <button class="btn-cantidad" data-accion="decrementar" data-item-id="${item.id_carrito}">-</button>
+                    <button class="btn-cantidad" data-accion="decrementar" data-item-id="${item.id_producto}">-</button>
                     <span class="cantidad">${item.cantidad}</span>
-                    <button class="btn-cantidad" data-accion="incrementar" data-item-id="${item.id_carrito}">+</button>
+                    <button class="btn-cantidad" data-accion="incrementar" data-item-id="${item.id_producto}">+</button>
                 </div>
                 
                 <div class="item-subtotal">
-                    $${subtotal.toFixed(2)}
+                    $${isNaN(subtotal) ? '0.00' : subtotal.toFixed(2)}
                 </div>
                 
-                <button class="btn-eliminar" data-item-id="${item.id}">
+                <button class="btn-eliminar" data-item-id="${item.id_producto}">
                     <i data-lucide="trash-2" width="16" height="16"></i>
                 </button>
             </div>
@@ -218,7 +218,7 @@ const calcularTotales = () => {
  */
 const modificarCantidad = async (itemId, accion) => {
     try {
-        const item = carrito.find(c => c.id_carrito === parseInt(itemId));
+        const item = carrito.find(c => c.id_producto === parseInt(itemId));
         if (!item) return;
 
         const nuevaCantidad = accion === 'incrementar' ? item.cantidad + 1 : item.cantidad - 1;
@@ -229,17 +229,14 @@ const modificarCantidad = async (itemId, accion) => {
         }
 
         const response = await api.put(`/carrito/producto/${itemId}`, { cantidad: nuevaCantidad });
-        
         if (response.success) {
             await cargarDatosCarrito();
+            // Si tienes función para actualizar contador, llámala aquí
         } else {
-            // Mostrar el mensaje de error que viene del backend
             await error(response.mensaje || 'Error al actualizar la cantidad');
         }
-        
     } catch (err) {
         console.error('Error modificando cantidad:', err);
-        // Si hay un mensaje de error en la respuesta, mostrarlo
         if (err.response && err.response.data && err.response.data.mensaje) {
             await error(err.response.data.mensaje);
         } else {
@@ -258,13 +255,16 @@ const eliminarItem = async (itemId) => {
             'Sí, eliminar',
             'Cancelar'
         );
-
         if (!confirmar) return;
 
-        await api.del(`/carrito/eliminar/${itemId}`);
-        await cargarDatosCarrito();
-        await success('Producto eliminado del carrito');
-        
+        const response = await api.del(`/carrito/producto/${itemId}`);
+        if (response.success) {
+            await cargarDatosCarrito();
+            await success('Producto eliminado del carrito');
+            // Si tienes función para actualizar contador, llámala aquí
+        } else {
+            await error('Error al eliminar producto del carrito');
+        }
     } catch (err) {
         console.error('Error eliminando item:', err);
         await error('Error al eliminar el producto');
@@ -304,10 +304,8 @@ const procesarCompra = async () => {
             return;
         }
 
-        const totalFinal = total * 1.16;
-        
         const confirmar = await confirm(
-            `¿Proceder con la compra por $${totalFinal.toFixed(2)}?`,
+            `¿Proceder con la compra por $${total.toFixed(2)}?`,
             'Sí, procesar compra',
             'Cancelar'
         );
@@ -319,7 +317,8 @@ const procesarCompra = async () => {
         btnProcesar.disabled = true;
         btnProcesar.innerHTML = '<i data-lucide="loader" width="16" height="16"></i> Procesando...';
 
-        const response = await api.post('/ventas/procesar-compra');
+        // Enviar el total como número, no como string formateado
+        const response = await api.post('/ventas/procesar-compra', { total: Number(total) });
 
         if (response.success) {
             await success('¡Compra procesada exitosamente!');
