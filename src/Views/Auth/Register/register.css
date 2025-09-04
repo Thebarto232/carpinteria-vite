@@ -41,9 +41,9 @@
     background: white;
     border-radius: 20px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-    padding: 2.5rem;
+    padding: 2.5rem 3.5rem;
     width: 100%;
-    max-width: 420px;
+    max-width: 650px;
     margin-bottom: 2rem;
 }
 
@@ -69,12 +69,14 @@
 }
 
 /* Formulario */
-.register-form {
+.register-card {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    padding: 2.5rem 3.5rem;
     width: 100%;
-}
-
-.form-group {
-    margin-bottom: 1.5rem;
+    max-width: 1200px;
+    margin-bottom: 2rem;
 }
 
 .form-label {
@@ -129,6 +131,7 @@
 
 /* Botón de registro */
 .register-button {
+    grid-column: 1 / -1;
     width: 100%;
     background: #3b82f6;
     color: white;
@@ -213,23 +216,15 @@
 }
 
 /* Información adicional */
-.register-info {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-    max-width: 800px;
+
+.register-form {
     width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem 1.5rem;
 }
 
-.info-card {
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(10px);
-    padding: 1.5rem;
-    border-radius: 15px;
-    text-align: center;
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-}
+
 
 .info-card h3 {
     margin: 1rem 0 0.5rem 0;
@@ -244,6 +239,15 @@
     line-height: 1.4;
 }
 
+.register-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.5rem;
+    max-width: 1200px;
+    width: 100%;
+}
+
+
 /* Responsive */
 @media (max-width: 768px) {
     .register-container {
@@ -251,7 +255,8 @@
     }
 
     .register-card {
-    padding: 2rem 1.5rem;
+    padding: 1.5rem 0.5rem;
+    max-width: 98vw;
     }
 
     .app-title {
@@ -265,5 +270,19 @@
 
     .register-info {
     grid-template-columns: 1fr;
+    }
+    .register-form {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+    }
+}
+
+@media (max-width: 1200px) {
+    .register-card {
+        max-width: 98vw;
+    }
+    .register-form {
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem 1rem;
     }
 }
