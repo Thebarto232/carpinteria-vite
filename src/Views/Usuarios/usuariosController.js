@@ -223,11 +223,13 @@ const llenarSelectRoles = (roles) => {
     const rolesArray = Array.isArray(roles) ? roles : Object.values(roles);
     
     rolesArray.forEach(rol => {
-        const option = document.createElement('option');
-        // Usar el nombre del rol como value para que coincida con lo que devuelve el backend
-        option.value = rol.nombre_rol || rol.rol || rol.name;
-        option.textContent = rol.nombre_rol || rol.rol || rol.name;
-        select.appendChild(option);
+        const nombreRol = rol.nombre_rol || rol.rol || rol.name;
+        if (nombreRol && nombreRol.toLowerCase() !== 'superadmin') {
+            const option = document.createElement('option');
+            option.value = nombreRol;
+            option.textContent = nombreRol;
+            select.appendChild(option);
+        }
     });
 };
 
