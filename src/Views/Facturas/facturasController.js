@@ -168,20 +168,21 @@ const mostrarTablaFacturas = (facturas) => {
     const puedeEliminar = permisos.includes('eliminar_facturas') || permisos.includes('*');
 
     container.innerHTML = `
-        <table class="facturas-table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>N° Factura</th>
-                    <th>Cliente</th>
-                    <th>Contacto</th>
-                    <th>Items</th>
-                    <th>Fecha</th>
-                    <th>Total</th>
-                    <th>Estado</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
+        <div class="table-container">
+            <table class="facturas-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>N° Factura</th>
+                        <th>Cliente</th>
+                        <th>Contacto</th>
+                        <th>Items</th>
+                        <th>Fecha</th>
+                        <th>Total</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
             <tbody>
                 ${facturas.map(factura => `
                     <tr data-factura-id="${factura.id_factura}" data-estado="${factura.estado_factura === 'EMITIDA' ? 'GENERADA' : factura.estado_factura}" data-fecha="${factura.fecha_factura}">
@@ -247,6 +248,7 @@ const mostrarTablaFacturas = (facturas) => {
                 `).join('')}
             </tbody>
         </table>
+        </div>
     `;
     
     // Actualizar iconos

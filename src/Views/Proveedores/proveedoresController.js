@@ -148,18 +148,19 @@ const mostrarTablaProveedores = (proveedores) => {
     
     console.log('Proveedores cargados:', proveedores);
     container.innerHTML = `
-        <table class="proveedores-table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre del Proveedor</th>
-                    <th>Contacto</th>
-                    <th>Email</th>
-                    <th>Teléfono</th>
-                    <th>Total Productos</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
+        <div class="table-container">
+            <table class="proveedores-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre del Proveedor</th>
+                        <th>Contacto</th>
+                        <th>Email</th>
+                        <th>Teléfono</th>
+                        <th>Total Productos</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
             <tbody>
                 ${proveedores.map(proveedor => `
                     <tr data-proveedor-id="${proveedor.id_proveedor}">
@@ -207,6 +208,7 @@ const mostrarTablaProveedores = (proveedores) => {
                 `).join('')}
             </tbody>
         </table>
+        </div>
     `;
     
     // Actualizar iconos

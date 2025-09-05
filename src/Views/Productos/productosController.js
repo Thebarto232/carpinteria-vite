@@ -236,19 +236,20 @@ const mostrarTablaProductos = (productos) => {
     const puedeEliminar = permisos.includes('eliminar_productos') || permisos.includes('*');
 
     container.innerHTML = `
-        <table class="productos-table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Producto</th>
-                    <th>Categoría</th>
-                    <th>Proveedor</th>
-                    <th>Precio</th>
-                    <th>Stock</th>
-                    <th>Estado</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
+        <div class="table-container">
+            <table class="productos-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Producto</th>
+                        <th>Categoría</th>
+                        <th>Proveedor</th>
+                        <th>Precio</th>
+                        <th>Stock</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
             <tbody>
                 ${productos.map(producto => {
                     const estadoClass = {
@@ -314,6 +315,7 @@ const mostrarTablaProductos = (productos) => {
                 }).join('')}
             </tbody>
         </table>
+        </div>
     `;
     
     // Actualizar iconos

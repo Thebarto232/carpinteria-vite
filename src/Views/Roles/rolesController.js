@@ -169,16 +169,17 @@ const mostrarTablaRoles = (roles) => {
     console.log('Puede eliminar:', puedeEliminar);
 
     container.innerHTML = `
-        <table class="roles-table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre del Rol</th>
-                    <th>Descripción</th>
-                    <th>Fecha Creación</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
+        <div class="table-container">
+            <table class="roles-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre del Rol</th>
+                        <th>Descripción</th>
+                        <th>Fecha Creación</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
             <tbody>
                 ${roles.map(rol => `
                     <tr data-rol-id="${rol.id_rol}">
@@ -222,6 +223,7 @@ const mostrarTablaRoles = (roles) => {
                 `).join('')}
             </tbody>
         </table>
+        </div>
     `;
     
     // Actualizar iconos

@@ -123,6 +123,14 @@
     display: flex;
     gap: 1rem;
     align-items: center;
+    flex-direction: row; /* Forzar horizontal por defecto */
+}
+
+/* En desktop, asegurar que sea horizontal */
+@media (min-width: 769px) {
+    .search-section {
+        flex-direction: row !important; /* Forzar horizontal en desktop */
+    }
 }
 
 .search-input {
@@ -137,6 +145,33 @@
 .search-input:focus {
     outline: none;
     border-color: var(--color-primary);
+}
+
+/* Contenedor de tabla con scroll horizontal */
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    border-radius: 8px;
+    box-shadow: var(--shadow-light);
+}
+
+/* Asegurar que la tabla mantenga su ancho mínimo */
+.categorias-table {
+    min-width: 650px; /* Ancho mínimo para todas las columnas de categorías */
+}
+
+/* Hacer que la columna de acciones sea sticky (siempre visible) */
+.categorias-table th:last-child,
+.categorias-table td:last-child {
+    position: sticky;
+    right: 0;
+    background: var(--color-card);
+    box-shadow: -2px 0 4px var(--color-shadow);
+    z-index: 10;
+}
+
+.categorias-table th:last-child {
+    background: var(--color-bg-light);
 }
 
 /* Tabla */
@@ -332,19 +367,115 @@
 /* Responsive Design */
 @media (max-width: 768px) {
     .categorias-content {
-    padding: 1rem;
+        padding: 1rem;
     }
     
     .categorias-header {
-    flex-direction: column;
-    gap: 1rem;
-    text-align: center;
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+        padding: 1.5rem;
     }
 
     .categorias-page-container .categorias-header-actions {
-    width: 100%;
-    justify-content: center;
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.75rem;
     }
+
+    .search-section {
+        flex-direction: column; /* Solo en móvil será vertical */
+        gap: 0.75rem;
+    }
+
+    .search-input {
+        padding: 10px;
+    }
+
+    /* Tabla responsive con scroll horizontal */
+    .table-container {
+        margin: 0 -1rem; /* Extender el scroll hasta los bordes en móvil */
+        border-radius: 0;
+    }
+
+    .categorias-table {
+        font-size: 13px;
+        min-width: 550px; /* Reducir un poco el ancho mínimo en móvil */
+    }
+
+    .categorias-table th,
+    .categorias-table td {
+        padding: 8px 6px;
+        white-space: nowrap; /* Evitar que el texto se corte */
+    }
+
+    /* Columna de acciones siempre visible con mejor espaciado */
+    .categorias-table th:last-child,
+    .categorias-table td:last-child {
+        min-width: 120px; /* Ancho fijo para acciones */
+        padding: 8px;
+    }
+
+    .categorias-page-container .actions {
+        gap: 4px; /* Reducir espacio entre botones */
+    }
+
+    .categorias-page-container .btn-sm {
+        padding: 4px 8px;
+        font-size: 11px;
+    }
+
+    .categorias-page-container .modal-content {
+        width: 95%;
+        margin: 10px;
+    }
+
+    .categorias-page-container .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    /* Mejorar la experiencia del scroll horizontal */
+    .table-container::-webkit-scrollbar {
+        height: 6px;
+    }
+
+    .table-container::-webkit-scrollbar-track {
+        background: var(--color-bg);
+    }
+
+    .table-container::-webkit-scrollbar-thumb {
+        background: var(--color-border);
+        border-radius: 3px;
+    }
+
+    .table-container::-webkit-scrollbar-thumb:hover {
+        background: var(--color-secondary);
+    }
+
+    /* Ajustes específicos para categorías en móvil */
+    .categoria-description {
+        font-size: 11px;
+    }
+}
+
+/* Tablet responsive */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .categorias-table {
+        font-size: 14px;
+        min-width: 600px;
+    }
+
+    .categorias-table th,
+    .categorias-table td {
+        padding: 10px 8px;
+    }
+
+    .categorias-page-container .btn {
+        padding: 8px 12px;
+        font-size: 13px;
+    }
+}
 
     .search-section {
     flex-direction: column;
@@ -358,16 +489,6 @@
     .categorias-table td {
     padding: 8px;
     }
-
-    .categorias-page-container .actions {
-    flex-direction: column;
-    }
-
-    .categorias-page-container .modal-content {
-    width: 95%;
-    margin: 10px;
-    }
-}
 
 @keyframes spin {
     from { transform: rotate(0deg); }

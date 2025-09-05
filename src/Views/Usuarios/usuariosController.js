@@ -279,19 +279,20 @@ const mostrarTablaUsuarios = (usuarios) => {
     const puedeEliminar = permisos.includes('eliminar_usuarios') || permisos.includes('*');
 
     container.innerHTML = `
-        <table class="usuarios-table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre Completo</th>
-                    <th>Email</th>
-                    <th>Teléfono</th>
-                    <th>Rol</th>
-                    <th>Estado</th>
-                    <th>Fecha Registro</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
+        <div class="table-container">
+            <table class="usuarios-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre Completo</th>
+                        <th>Email</th>
+                        <th>Teléfono</th>
+                        <th>Rol</th>
+                        <th>Estado</th>
+                        <th>Fecha Registro</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
             <tbody>
                 ${usuarios.map(usuario => `
                     <tr data-usuario-id="${usuario.id_usuario}" data-estado="${usuario.estado}">
@@ -349,6 +350,7 @@ const mostrarTablaUsuarios = (usuarios) => {
                 `).join('')}
             </tbody>
         </table>
+        </div>
     `;
     
     // Guardar usuarios en variable global para uso posterior

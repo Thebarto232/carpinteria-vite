@@ -192,6 +192,33 @@
     margin-bottom: 0.25rem;
 }
 
+/* Contenedor de tabla con scroll horizontal */
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    border-radius: 8px;
+    box-shadow: var(--shadow-light);
+}
+
+/* Asegurar que la tabla mantenga su ancho mínimo */
+.productos-table {
+    min-width: 1000px; /* Ancho mínimo para todas las columnas de productos */
+}
+
+/* Hacer que la columna de acciones sea sticky (siempre visible) */
+.productos-table th:last-child,
+.productos-table td:last-child {
+    position: sticky;
+    right: 0;
+    background: var(--color-card);
+    box-shadow: -2px 0 4px var(--color-shadow);
+    z-index: 10;
+}
+
+.productos-table th:last-child {
+    background: var(--color-bg);
+}
+
 /* Tabla */
 .productos-table {
     width: 100%;
@@ -446,52 +473,136 @@
 /* Responsive Design */
 @media (max-width: 768px) {
     .productos-content {
-    padding: 1rem;
+        padding: 1rem;
     }
     
     .productos-header {
-    flex-direction: column;
-    gap: 1rem;
-    text-align: center;
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+        padding: 1.5rem;
     }
 
     .productos-page-container .productos-header-actions {
-    flex-direction: column;
-    width: 100%;
+        flex-direction: column;
+        width: 100%;
+        gap: 0.75rem;
     }
 
     .filters-row {
-    grid-template-columns: 1fr;
-    gap: 1rem;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .productos-filters {
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    /* Tabla responsive con scroll horizontal */
+    .table-container {
+        margin: 0 -1rem; /* Extender el scroll hasta los bordes en móvil */
+        border-radius: 0;
     }
 
     .productos-table {
-    font-size: 0.875rem;
+        font-size: 13px;
+        min-width: 900px; /* Reducir un poco el ancho mínimo en móvil */
     }
 
     .productos-table th,
     .productos-table td {
-    padding: 8px 6px;
+        padding: 8px 6px;
+        white-space: nowrap; /* Evitar que el texto se corte */
+    }
+
+    /* Columna de acciones siempre visible con mejor espaciado */
+    .productos-table th:last-child,
+    .productos-table td:last-child {
+        min-width: 140px; /* Ancho fijo para acciones (más ancho que usuarios) */
+        padding: 8px;
     }
 
     .productos-page-container .actions {
-    flex-direction: column;
+        gap: 4px; /* Reducir espacio entre botones */
+    }
+
+    .productos-page-container .btn-sm {
+        padding: 4px 8px;
+        font-size: 11px;
     }
 
     .productos-page-container .modal-content {
-    width: 95%;
-    margin: 10px;
+        width: 95%;
+        margin: 10px;
     }
 
     .productos-page-container .form-row {
-    grid-template-columns: 1fr;
+        grid-template-columns: 1fr;
+    }
+
+    /* Mejorar la experiencia del scroll horizontal */
+    .table-container::-webkit-scrollbar {
+        height: 6px;
+    }
+
+    .table-container::-webkit-scrollbar-track {
+        background: var(--color-bg);
+    }
+
+    .table-container::-webkit-scrollbar-thumb {
+        background: var(--color-border);
+        border-radius: 3px;
+    }
+
+    .table-container::-webkit-scrollbar-thumb:hover {
+        background: var(--color-secondary);
+    }
+
+    /* Ajustes específicos para productos en móvil */
+    .producto-info strong {
+        font-size: 13px;
+    }
+
+    .producto-info small {
+        font-size: 11px;
+    }
+
+    .badge {
+        font-size: 10px;
+        padding: 0.2rem 0.5rem;
+    }
+
+    .precio {
+        font-size: 13px;
+    }
+
+    .stock {
+        font-size: 11px;
+        padding: 0.2rem 0.4rem;
     }
 }
 
-@media (max-width: 1024px) {
+/* Tablet responsive */
+@media (max-width: 1024px) and (min-width: 769px) {
     .filters-row {
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+
+    .productos-table {
+        font-size: 14px;
+        min-width: 950px;
+    }
+
+    .productos-table th,
+    .productos-table td {
+        padding: 10px 8px;
+    }
+
+    .productos-page-container .btn {
+        padding: 8px 12px;
+        font-size: 13px;
     }
 }
 

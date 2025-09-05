@@ -146,16 +146,17 @@ const mostrarTablaCategorias = (categorias) => {
     const puedeEliminar = permisos.includes('eliminar_categorias') || permisos.includes('*');
 
     container.innerHTML = `
-        <table class="categorias-table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre de la Categoría</th>
-                    <th>Descripción</th>
-                    <th>Total Productos</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
+        <div class="table-container">
+            <table class="categorias-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre de la Categoría</th>
+                        <th>Descripción</th>
+                        <th>Total Productos</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
             <tbody>
                 ${categorias.map(categoria => `
                     <tr data-categoria-id="${categoria.id_categoria}">
@@ -201,6 +202,7 @@ const mostrarTablaCategorias = (categorias) => {
                 `).join('')}
             </tbody>
         </table>
+        </div>
     `;
     
     // Actualizar iconos
