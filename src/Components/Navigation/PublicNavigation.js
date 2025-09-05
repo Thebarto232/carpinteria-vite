@@ -5,6 +5,7 @@
 
 import { userManager } from '../../Helpers/userManager.js';
 import { confirm } from '../../Helpers/alertas.js';
+import * as api from '../../Helpers/api.js';
 
 export class PublicNavigation {
     constructor() {
@@ -63,7 +64,7 @@ export class PublicNavigation {
             <nav class="home-nav">
                 <div class="nav-content">
                     <div class="nav-brand">
-                        <i data-lucide="hammer" width="24" height="24" style="color: #3b82f6;"></i>
+                        <i data-lucide="hammer" width="24" height="24" style="color: var(--color-primary);"></i>
                         <span>Carpintería Pro</span>
                     </div>
                     

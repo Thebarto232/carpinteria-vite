@@ -1,5 +1,108 @@
 /* Custom properties globales  */
 :root {
+    --color-disabled: #d1d5db;
+    --color-info-bg: #e0f2fe;
+    --color-info-text: #2563eb;
+    --color-bg-light: #f3f4f6;
+    --color-bg-muted: #f3f4f6;
+    --color-bg-inverse: #fff;
+    --color-text-dark: #374151;
+    --color-text-strong: #1f2937;
+    --color-success-bg: #e6f9f0;
+    --color-success-text: #059669;
+    --color-danger-bg: #ffe5e5;
+    --color-danger-text: #dc2626;
+    --color-warning-bg: #fff7e5;
+    --color-warning-text: #f59e42;
+    --color-icon-muted: #9ca3af;
+    --shadow-img: 0 2px 8px rgba(0,0,0,0.07);
+    --shadow-light: 0 1px 3px rgba(0,0,0,0.1);
+    --color-overlay: rgba(0,0,0,0.5);
+    
+    /* Gradientes */
+    --color-gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --color-primary-light: rgba(59, 130, 246, 0.05);
+    
+    --color-text-inverse: #fff;
+    --color-text-inverse-muted: rgba(255, 255, 255, 0.9);
+    
+    /* Botones con gradientes */
+    --color-btn-primary-gradient: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    --color-btn-secondary-gradient: linear-gradient(135deg, #64748b, #475569);
+    --color-btn-danger-gradient: linear-gradient(135deg, #ef4444, #dc2626);
+    --shadow-btn-primary: 0 8px 25px rgba(59, 130, 246, 0.4);
+    --shadow-btn-secondary: 0 8px 25px rgba(100, 116, 139, 0.4);
+    --shadow-btn-danger: 0 8px 25px rgba(239, 68, 68, 0.4);
+    
+    /* Sombras especiales */
+    --shadow-modal: 0 20px 60px rgba(0, 0, 0, 0.3);
+    --shadow-focus: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    --shadow-nav: 0 2px 20px rgba(0,0,0,0.1);
+    --shadow-hero-btn: 0 8px 25px rgba(255,255,255,0.3);
+    --shadow-modal-footer: 0 -2px 12px rgba(0,0,0,0.07);
+    --shadow-btn: 0 1px 4px rgba(0,0,0,0.07);
+    --shadow-carrusel: 0 2px 8px rgba(59,130,246,0.12);
+    --shadow-modal-img: 0 2px 24px rgba(0,0,0,0.13);
+    --shadow-card-lg: 0 8px 25px rgba(0,0,0,0.15);
+    
+    /* Navegación */
+    --color-nav-overlay: rgba(255, 255, 255, 0.95);
+    --color-border-light: rgba(229, 231, 235, 0.3);
+    --color-nav-user-bg: rgba(248, 250, 252, 0.8);
+    --color-text-nav: #1e293b;
+    
+    /* Hero cards */
+    --color-hero-card: rgba(255,255,255,0.15);
+    --color-hero-card-border: rgba(255,255,255,0.2);
+    --color-hero-btn-secondary: rgba(255,255,255,0.2);
+    --color-hero-btn-border: rgba(255,255,255,0.3);
+    --color-hero-btn-secondary-hover: rgba(255,255,255,0.3);
+    
+    /* Otros */
+    --color-bg-gradient: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    --color-danger-border: #fecaca;
+    --color-secondary-dark: #475569;
+    --shadow-modal-overlay: rgba(0,0,0,0.5);
+    --shadow-modal-content: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    
+    /* Stats section */
+    --color-stats-bg: #1f2937;
+    --color-stats-item-bg: rgba(255,255,255,0.1);
+    
+    /* Tienda específico */
+    --color-modal-descripcion-bg: #f4f4f8;
+    --color-modal-descripcion-text: #555;
+    --color-producto-carrusel-bg: #f3f4f6;
+    --color-categoria-bg: #e0e7ff;
+    --color-categoria-text: #3730a3;
+    --color-btn-hero-bg: rgba(255, 255, 255, 0.2);
+    --color-btn-hero-border: rgba(255, 255, 255, 0.3);
+    --color-btn-hero-hover: rgba(255, 255, 255, 0.3);
+    --color-btn-hero-hover-border: rgba(255, 255, 255, 0.5);
+    
+    /* Carrusel arrows */
+    --color-carrusel-arrow-bg: #fff;
+    --color-carrusel-arrow-border: #e5e7eb;
+    --color-carrusel-arrow: #3b82f6;
+    --color-carrusel-arrow-hover-bg: #3b82f6;
+    --color-carrusel-arrow-hover: #fff;
+    --shadow-carrusel-arrow: 0 2px 8px rgba(59,130,246,0.12);
+    --color-carrusel-bg: #f3f4f6;
+    
+    /* Dashboard Navigation */
+    --color-dashboard-bg: #343a40;
+    --color-dashboard-text: #fff;
+    --color-dashboard-btn: rgba(255, 255, 255, 0.8);
+    --color-dashboard-btn-border: rgba(255, 255, 255, 0.2);
+    --color-dashboard-btn-hover: rgba(255, 255, 255, 0.1);
+    --color-dashboard-btn-active: rgba(255, 255, 255, 0.2);
+    --color-dashboard-btn-active-border: rgba(255, 255, 255, 0.4);
+    --color-dashboard-action-btn: rgba(255, 255, 255, 0.1);
+    --color-dashboard-action-btn-hover: rgba(255, 255, 255, 0.2);
+    --color-dashboard-logout: #dc3545;
+    --color-dashboard-logout-hover: #c82333;
+    --shadow-dashboard: 0 2px 4px rgba(0,0,0,0.1);
+    
     --color-primary: #3b82f6;
     --color-primary-dark: #2563eb;
     --color-secondary: #64748b;
@@ -19,6 +122,7 @@
     --space: 1rem;
     --shadow: 0 2px 10px rgba(0,0,0,0.1);
     --shadow-lg: 0 10px 30px rgba(0,0,0,0.1);
+    --shadow-hover: 0 4px 12px rgba(59, 130, 246, 0.15);
 }
 
 body {

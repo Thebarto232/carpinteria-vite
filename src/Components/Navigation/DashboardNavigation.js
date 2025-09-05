@@ -112,23 +112,13 @@ export class DashboardNavigation {
       
       <style>
         .dashboard-header {
-          background: #343a40;
-          color: white;
+          background: var(--color-dashboard-bg);
+          color: var(--color-dashboard-text);
           padding: 1rem 2rem;
           display: flex;
           justify-content: space-between;
           align-items: center;
-          box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-          position: sticky;
-          top: 0;
-          z-index: 1000;
-        }
-          color: white;
-          padding: 1rem 2rem;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+          box-shadow: var(--shadow-dashboard);
           position: sticky;
           top: 0;
           z-index: 1000;
@@ -138,7 +128,7 @@ export class DashboardNavigation {
           font-size: 1.5rem;
           font-weight: 600;
           margin: 0;
-          color: white;
+          color: var(--color-dashboard-text);
         }
         
         .main-nav {
@@ -150,8 +140,8 @@ export class DashboardNavigation {
         
         .nav-btn {
           background: transparent;
-          color: rgba(255, 255, 255, 0.8);
-          border: 1px solid rgba(255, 255, 255, 0.2);
+          color: var(--color-dashboard-btn);
+          border: 1px solid var(--color-dashboard-btn-border);
           padding: 0.5rem 0.75rem;
           border-radius: 5px;
           cursor: pointer;
@@ -164,14 +154,14 @@ export class DashboardNavigation {
         }
         
         .nav-btn:hover {
-          background: rgba(255, 255, 255, 0.1);
-          color: white;
+          background: var(--color-dashboard-btn-hover);
+          color: var(--color-dashboard-text);
         }
         
         .nav-btn.active {
-          background: rgba(255, 255, 255, 0.2);
-          color: white;
-          border-color: rgba(255, 255, 255, 0.4);
+          background: var(--color-dashboard-btn-active);
+          color: var(--color-dashboard-text);
+          border-color: var(--color-dashboard-btn-active-border);
         }
         
         .nav-user-info {
@@ -200,8 +190,8 @@ export class DashboardNavigation {
         }
         
         .action-btn {
-          background: rgba(255, 255, 255, 0.1);
-          color: white;
+          background: var(--color-dashboard-action-btn);
+          color: var(--color-dashboard-text);
           border: none;
           padding: 0.5rem;
           border-radius: 50%;
@@ -216,12 +206,12 @@ export class DashboardNavigation {
         }
         
         .action-btn:hover {
-          background: rgba(255, 255, 255, 0.2);
+          background: var(--color-dashboard-action-btn-hover);
         }
         
         .logout-btn {
-          background: #dc3545;
-          color: white;
+          background: var(--color-dashboard-logout);
+          color: var(--color-dashboard-text);
           border: none;
           padding: 0.5rem;
           border-radius: 5px;
@@ -236,7 +226,7 @@ export class DashboardNavigation {
         }
         
         .logout-btn:hover {
-          background: #c82333;
+          background: var(--color-dashboard-logout-hover);
         }
         
         @media (max-width: 768px) {

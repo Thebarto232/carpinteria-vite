@@ -1,6 +1,6 @@
 .login-container {
     min-height: 100vh;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: var(--color-gradient-primary);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -24,23 +24,23 @@
 }
 
 .app-title {
-    color: white;
+    color: var(--color-text-inverse);
     font-size: 2rem;
     font-weight: 800;
     margin: 0;
 }
 
 .login-subtitle {
-    color: rgba(255, 255, 255, 0.9);
+    color: var(--color-text-inverse-muted);
     font-size: 1.1rem;
     margin: 0;
 }
 
 /* Card principal */
 .login-card {
-    background: white;
+    background: var(--color-card);
     border-radius: 20px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    box-shadow: var(--shadow-modal);
     padding: 2.5rem;
     width: 100%;
     max-width: 420px;
@@ -53,7 +53,7 @@
 }
 
 .login-title {
-    color: #1f2937;
+    color: var(--color-text);
     font-size: 1.5rem;
     font-weight: 700;
     margin: 0 0 0.5rem 0;
@@ -64,7 +64,7 @@
 }
 
 .login-description {
-    color: #6b7280;
+    color: var(--color-muted);
     margin: 0;
 }
 
@@ -81,7 +81,7 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    color: #374151;
+    color: var(--color-text-dark);
     font-weight: 600;
     margin-bottom: 0.5rem;
     font-size: 0.9rem;
@@ -96,25 +96,25 @@
 .input-icon {
     position: absolute;
     left: 1rem;
-    color: #9ca3af;
+    color: var(--color-icon-muted);
     z-index: 1;
 }
 
 .form-input {
     width: 100%;
     padding: 1rem 1rem 1rem 3rem;
-    border: 2px solid #e5e7eb;
+    border: 2px solid var(--color-border);
     border-radius: 10px;
     font-size: 1rem;
     transition: all 0.3s ease;
-    background: #f9fafb;
+    background: var(--color-bg-light);
 }
 
 .form-input:focus {
     outline: none;
-    border-color: #3b82f6;
-    background: white;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    border-color: var(--color-primary);
+    background: var(--color-card);
+    box-shadow: var(--shadow-focus);
 }
 
 .toggle-password {
@@ -122,7 +122,7 @@
     right: 1rem;
     background: none;
     border: none;
-    color: #9ca3af;
+    color: var(--color-icon-muted);
     cursor: pointer;
     padding: 0.25rem;
     border-radius: 4px;
@@ -130,11 +130,11 @@
 }
 
 .toggle-password:hover {
-    color: #3b82f6;
+    color: var(--color-primary);
 }
 
 .error-message {
-    color: #ef4444;
+    color: var(--color-danger);
     font-size: 0.85rem;
     margin-top: 0.5rem;
 }
@@ -157,7 +157,7 @@
     align-items: center;
     gap: 0.5rem;
     cursor: pointer;
-    color: #374151;
+    color: var(--color-text-dark);
 }
 
 .checkbox-container input {
@@ -167,7 +167,7 @@
 .checkmark {
     width: 18px;
     height: 18px;
-    border: 2px solid #d1d5db;
+    border: 2px solid var(--color-border);
     border-radius: 4px;
     display: flex;
     align-items: center;
@@ -176,13 +176,13 @@
 }
 
 .checkbox-container input:checked + .checkmark {
-    background: #3b82f6;
-    border-color: #3b82f6;
-    color: white;
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: var(--color-text-inverse);
 }
 
 .forgot-password {
-    color: #3b82f6;
+    color: var(--color-primary);
     text-decoration: none;
     display: flex;
     align-items: center;
@@ -191,14 +191,14 @@
 }
 
 .forgot-password:hover {
-    color: #2563eb;
+    color: var(--color-primary-dark);
 }
 
 /* Botón de login */
 .login-button {
     width: 100%;
-    background: #3b82f6;
-    color: white;
+    background: var(--color-primary);
+    color: var(--color-text-inverse);
     border: none;
     padding: 1rem;
     border-radius: 10px;
@@ -211,9 +211,9 @@
 }
 
 .login-button:hover:not(:disabled) {
-    background: #2563eb;
+    background: var(--color-primary-dark);
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+    box-shadow: var(--shadow-hover);
 }
 
 .login-button:disabled {
@@ -239,9 +239,9 @@
 
 /* Error general */
 .general-error {
-    background: #fef2f2;
-    border: 1px solid #fecaca;
-    color: #dc2626;
+    background: var(--color-danger-bg);
+    border: 1px solid var(--color-danger-border);
+    color: var(--color-danger-text);
     padding: 1rem;
     border-radius: 8px;
     margin-top: 1rem;
@@ -256,17 +256,17 @@
     text-align: center;
     margin-top: 1.5rem;
     padding-top: 1.5rem;
-    border-top: 1px solid #e5e7eb;
+    border-top: 1px solid var(--color-border);
 }
 
 .register-link {
-    color: #6b7280;
+    color: var(--color-muted);
     margin: 0;
     font-size: 0.9rem;
 }
 
 .register-link a {
-    color: #3b82f6;
+    color: var(--color-primary);
     text-decoration: none;
     font-weight: 600;
     display: inline-flex;
@@ -276,7 +276,7 @@
 }
 
 .register-link a:hover {
-    color: #2563eb;
+    color: var(--color-primary-dark);
 }
 
 /* Información adicional */
@@ -289,13 +289,13 @@
 }
 
 .info-card {
-    background: rgba(255, 255, 255, 0.15);
+    background: var(--color-hero-card);
     backdrop-filter: blur(10px);
     padding: 1.5rem;
     border-radius: 15px;
     text-align: center;
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--color-text-inverse);
+    border: 1px solid var(--color-hero-card-border);
 }
 
 .info-card h3 {

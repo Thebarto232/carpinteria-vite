@@ -1,20 +1,20 @@
 .home-container {
     min-height: 100vh;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: var(--color-gradient-primary);
     margin: 0;
     padding: 0;
 }
 
 /* Navigation */
 .home-nav {
-    background: rgba(255, 255, 255, 0.95);
+    background: var(--color-nav-overlay);
     backdrop-filter: blur(10px);
     padding: 0;
     position: sticky;
     top: 0;
     z-index: 100;
-    box-shadow: 0 2px 20px rgba(0,0,0,0.1);
-    border-bottom: 1px solid rgba(229, 231, 235, 0.3);
+    box-shadow: var(--shadow-nav);
+    border-bottom: 1px solid var(--color-border-light);
 }
 
 .nav-content {
@@ -63,7 +63,7 @@
 
 .nav-link:hover {
     color: var(--color-primary);
-    background: rgba(59, 130, 246, 0.1);
+    background: var(--color-primary-light);
 }
 
 .nav-actions {
@@ -84,7 +84,7 @@
     gap: 0.75rem;
     padding: 0.5rem;
     border-radius: 8px;
-    background: rgba(248, 250, 252, 0.8);
+    background: var(--color-nav-user-bg);
 }
 
 .nav-user-name {
@@ -92,7 +92,7 @@
     align-items: center;
     gap: 0.5rem;
     font-weight: 500;
-    color: #1e293b;
+    color: var(--color-text-nav);
     font-size: 0.875rem;
 }
 
@@ -101,7 +101,7 @@
     align-items: center;
     gap: 0.5rem;
     background: var(--color-primary);
-    color: #fff;
+    color: var(--color-text-inverse);
     border: none;
     padding: 0.75rem 1.5rem;
     border-radius: 8px;
@@ -113,7 +113,7 @@
 }
 
 .nav-button:hover {
-    background: #2563eb;
+    background: var(--color-primary-dark);
     transform: translateY(-1px);
 }
 
@@ -122,17 +122,17 @@
 }
 
 .nav-button-secondary:hover {
-    background: #475569;
+    background: var(--color-secondary-dark);
 }
 
 .nav-button-primary {
-    background: #3b82f6;
+    background: var(--color-primary);
 }
 
 /* Hero Section */
 .hero {
     padding: 4rem 2rem;
-    color: white;
+    color: var(--color-text-inverse);
 }
 
 .hero-content {
@@ -180,23 +180,23 @@
 }
 
 .btn-primary {
-    background: white;
-    color: #3b82f6;
+    background: var(--color-card);
+    color: var(--color-primary);
 }
 
 .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(255,255,255,0.3);
+    box-shadow: var(--shadow-hero-btn);
 }
 
 .btn-secondary {
-    background: rgba(255,255,255,0.2);
-    color: white;
-    border: 2px solid rgba(255,255,255,0.3);
+    background: var(--color-hero-btn-secondary);
+    color: var(--color-text-inverse);
+    border: 2px solid var(--color-hero-btn-border);
 }
 
 .btn-secondary:hover {
-    background: rgba(255,255,255,0.3);
+    background: var(--color-hero-btn-secondary-hover);
     transform: translateY(-2px);
 }
 
@@ -206,22 +206,22 @@
 }
 
 .hero-card {
-    background: rgba(255,255,255,0.15);
+    background: var(--color-hero-card);
     backdrop-filter: blur(10px);
     padding: 3rem;
     border-radius: 20px;
     text-align: center;
-    border: 1px solid rgba(255,255,255,0.2);
+    border: 1px solid var(--color-hero-card-border);
 }
 
 .hero-card h3 {
     font-size: 1.5rem;
     margin: 1rem 0 0.5rem 0;
-    color: white;
+    color: var(--color-text-inverse);
 }
 
 .hero-card p {
-    color: rgba(255,255,255,0.9);
+    color: var(--color-text-inverse-muted);
     margin: 0;
 }
 
@@ -267,7 +267,7 @@
     background: var(--color-card);
     border-color: var(--color-primary);
     transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(59, 130, 246, 0.15);
+    box-shadow: var(--shadow-hover);
 }
 
 .feature-icon {
@@ -278,7 +278,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #fff;
+    color: var(--color-text-inverse);
     margin: 0 auto 1.5rem auto;
 }
 
@@ -297,8 +297,8 @@
 
 /* Stats Section */
 .stats {
-    background: #1f2937;
-    color: white;
+    background: var(--color-stats-bg);
+    color: var(--color-text-inverse);
     padding: 4rem 2rem;
 }
 
@@ -325,7 +325,7 @@
 }
 
 .stat-item {
-    background: rgba(255,255,255,0.1);
+    background: var(--color-stats-item-bg);
     padding: 2rem;
     border-radius: 15px;
     backdrop-filter: blur(10px);
@@ -334,12 +334,12 @@
 .stat-icon {
     width: 48px;
     height: 48px;
-    background: #3b82f6;
+    background: var(--color-primary);
     border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: var(--color-text-inverse);
     margin: 0 auto 1rem auto;
 }
 
@@ -347,7 +347,7 @@
     font-size: 2.5rem;
     font-weight: 800;
     margin-bottom: 0.5rem;
-    color: #3b82f6;
+    color: var(--color-primary);
 }
 
 .stat-item p {
